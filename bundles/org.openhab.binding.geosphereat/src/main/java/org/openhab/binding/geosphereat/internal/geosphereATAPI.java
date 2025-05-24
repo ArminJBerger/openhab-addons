@@ -29,7 +29,7 @@ public class geosphereATAPI {
         try {
             Logger logger = LoggerFactory.getLogger(geosphereATHandler.class);
             String url = BASE_URL + "/station/current/" + DATASET + "/filter?name=" + locationName;
-            logger.info("send weather stations request: " + url);
+            logger.debug("send weather stations request: " + url);
             HttpClient client = HttpClient.newHttpClient();
             HttpRequest req = HttpRequest.newBuilder().uri(URI.create(url)).build();
             HttpResponse<String> resp = client.send(req, HttpResponse.BodyHandlers.ofString());
@@ -49,7 +49,7 @@ public class geosphereATAPI {
                     weather_station_ids.put(station.getAsJsonObject().get("name").getAsString(), stationId);
                 }
             }
-            logger.info("weather_station_ids: " + weather_station_ids.toString());
+            logger.debug("weather_station_ids: " + weather_station_ids.toString());
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -64,11 +64,11 @@ public class geosphereATAPI {
                     + weather_station_ids.get(stationName)
                     + "&parameters=TL&parameters=RR&parameters=P&parameters=RF&parameters=SO"
                     + "&output_format=geojson";
-            logger.info("send current request: " + url);
+            logger.debug("send current request: " + url);
             HttpClient client = HttpClient.newHttpClient();
             HttpRequest req = HttpRequest.newBuilder().uri(URI.create(url)).build();
             HttpResponse<String> resp = client.send(req, HttpResponse.BodyHandlers.ofString());
-            logger.info("got response to current weather request: " + resp.body());
+            logger.debug("got response to current weather request: " + resp.body());
             // String resp =
             // "{\"media_type\":\"application/json\",\"type\":\"FeatureCollection\",\"version\":\"v1\",\"timestamps\":[\"2025-05-23T22:20+00:00\"],\"features\":[{\"type\":\"Feature\",\"geometry\":{\"type\":\"Point\",\"coordinates\":[15.410277777777779,47.04611111111111]},\"properties\":{\"parameters\":{\"TL\":{\"name\":\"Lufttemperatur\",\"unit\":\"°C\",\"data\":[10.0]},\"RR\":{\"name\":\"Niederschlag
             // der letzten 10
@@ -93,7 +93,7 @@ public class geosphereATAPI {
                     weatherData.put(para.getKey(), data.get(0).getAsNumber());
                 }
             }
-            logger.info("adding data to map: " + weatherData.toString());
+            logger.debug("adding data to map: " + weatherData.toString());
             return weatherData;
         } catch (Exception e) {
             e.printStackTrace();
@@ -112,11 +112,11 @@ public class geosphereATAPI {
                     + weather_station_ids.get(stationName)
                     + "&parameters=TL&parameters=RR&parameters=P&parameters=RF&parameters=SO" + "&start="
                     + start_time.toString() + "&end=" + end_time.toString() + "&output_format=geojson";
-            logger.info("send historic request: " + url);
+            logger.debug("send historic request: " + url);
             HttpClient client = HttpClient.newHttpClient();
             HttpRequest req = HttpRequest.newBuilder().uri(URI.create(url)).build();
             HttpResponse<String> resp = client.send(req, HttpResponse.BodyHandlers.ofString());
-            logger.info("got response to historic weather request: " + resp.body());
+            logger.debug("got response to historic weather request: " + resp.body());
             // String resp =
             // "{\"media_type\":\"application/json\",\"type\":\"FeatureCollection\",\"version\":\"v1\",\"timestamps\":[\"2025-05-23T13:50+00:00\",\"2025-05-23T14:00+00:00\",\"2025-05-23T14:10+00:00\",\"2025-05-23T14:20+00:00\",\"2025-05-23T14:30+00:00\",\"2025-05-23T14:40+00:00\",\"2025-05-23T14:50+00:00\",\"2025-05-23T15:00+00:00\",\"2025-05-23T15:10+00:00\",\"2025-05-23T15:20+00:00\",\"2025-05-23T15:30+00:00\",\"2025-05-23T15:40+00:00\",\"2025-05-23T15:50+00:00\",\"2025-05-23T16:00+00:00\",\"2025-05-23T16:10+00:00\",\"2025-05-23T16:20+00:00\",\"2025-05-23T16:30+00:00\",\"2025-05-23T16:40+00:00\",\"2025-05-23T16:50+00:00\",\"2025-05-23T17:00+00:00\",\"2025-05-23T17:10+00:00\",\"2025-05-23T17:20+00:00\",\"2025-05-23T17:30+00:00\",\"2025-05-23T17:40+00:00\",\"2025-05-23T17:50+00:00\",\"2025-05-23T18:00+00:00\",\"2025-05-23T18:10+00:00\",\"2025-05-23T18:20+00:00\",\"2025-05-23T18:30+00:00\",\"2025-05-23T18:40+00:00\",\"2025-05-23T18:50+00:00\",\"2025-05-23T19:00+00:00\",\"2025-05-23T19:10+00:00\",\"2025-05-23T19:20+00:00\",\"2025-05-23T19:30+00:00\",\"2025-05-23T19:40+00:00\",\"2025-05-23T19:50+00:00\",\"2025-05-23T20:00+00:00\",\"2025-05-23T20:10+00:00\",\"2025-05-23T20:20+00:00\",\"2025-05-23T20:30+00:00\",\"2025-05-23T20:40+00:00\",\"2025-05-23T20:50+00:00\",\"2025-05-23T21:00+00:00\",\"2025-05-23T21:10+00:00\",\"2025-05-23T21:20+00:00\",\"2025-05-23T21:30+00:00\",\"2025-05-23T21:40+00:00\",\"2025-05-23T21:50+00:00\",\"2025-05-23T22:00+00:00\",\"2025-05-23T22:10+00:00\",\"2025-05-23T22:20+00:00\",\"2025-05-23T22:30+00:00\",\"2025-05-23T22:40+00:00\",\"2025-05-23T22:50+00:00\",\"2025-05-23T23:00+00:00\",\"2025-05-23T23:10+00:00\",\"2025-05-23T23:20+00:00\",\"2025-05-23T23:30+00:00\",\"2025-05-23T23:40+00:00\",\"2025-05-23T23:50+00:00\",\"2025-05-24T00:00+00:00\",\"2025-05-24T00:10+00:00\",\"2025-05-24T00:20+00:00\",\"2025-05-24T00:30+00:00\",\"2025-05-24T00:40+00:00\",\"2025-05-24T00:50+00:00\",\"2025-05-24T01:00+00:00\",\"2025-05-24T01:10+00:00\",\"2025-05-24T01:20+00:00\",\"2025-05-24T01:30+00:00\",\"2025-05-24T01:40+00:00\",\"2025-05-24T01:50+00:00\",\"2025-05-24T02:00+00:00\",\"2025-05-24T02:10+00:00\",\"2025-05-24T02:20+00:00\",\"2025-05-24T02:30+00:00\",\"2025-05-24T02:40+00:00\",\"2025-05-24T02:50+00:00\",\"2025-05-24T03:00+00:00\",\"2025-05-24T03:10+00:00\",\"2025-05-24T03:20+00:00\",\"2025-05-24T03:30+00:00\",\"2025-05-24T03:40+00:00\",\"2025-05-24T03:50+00:00\",\"2025-05-24T04:00+00:00\",\"2025-05-24T04:10+00:00\",\"2025-05-24T04:20+00:00\",\"2025-05-24T04:30+00:00\",\"2025-05-24T04:40+00:00\",\"2025-05-24T04:50+00:00\",\"2025-05-24T05:00+00:00\",\"2025-05-24T05:10+00:00\",\"2025-05-24T05:20+00:00\",\"2025-05-24T05:30+00:00\",\"2025-05-24T05:40+00:00\",\"2025-05-24T05:50+00:00\",\"2025-05-24T06:00+00:00\",\"2025-05-24T06:10+00:00\",\"2025-05-24T06:20+00:00\",\"2025-05-24T06:30+00:00\",\"2025-05-24T06:40+00:00\",\"2025-05-24T06:50+00:00\",\"2025-05-24T07:00+00:00\",\"2025-05-24T07:10+00:00\",\"2025-05-24T07:20+00:00\",\"2025-05-24T07:30+00:00\",\"2025-05-24T07:40+00:00\",\"2025-05-24T07:50+00:00\",\"2025-05-24T08:00+00:00\",\"2025-05-24T08:10+00:00\",\"2025-05-24T08:20+00:00\",\"2025-05-24T08:30+00:00\",\"2025-05-24T08:40+00:00\",\"2025-05-24T08:50+00:00\",\"2025-05-24T09:00+00:00\",\"2025-05-24T09:10+00:00\",\"2025-05-24T09:20+00:00\",\"2025-05-24T09:30+00:00\",\"2025-05-24T09:40+00:00\",\"2025-05-24T09:50+00:00\",\"2025-05-24T10:00+00:00\",\"2025-05-24T10:10+00:00\",\"2025-05-24T10:20+00:00\",\"2025-05-24T10:30+00:00\",\"2025-05-24T10:40+00:00\",\"2025-05-24T10:50+00:00\",\"2025-05-24T11:00+00:00\",\"2025-05-24T11:10+00:00\",\"2025-05-24T11:20+00:00\",\"2025-05-24T11:30+00:00\",\"2025-05-24T11:40+00:00\",\"2025-05-24T11:50+00:00\",\"2025-05-24T12:00+00:00\",\"2025-05-24T12:10+00:00\",\"2025-05-24T12:20+00:00\",\"2025-05-24T12:30+00:00\",\"2025-05-24T12:40+00:00\",\"2025-05-24T12:50+00:00\",\"2025-05-24T13:00+00:00\",\"2025-05-24T13:10+00:00\",\"2025-05-24T13:20+00:00\",\"2025-05-24T13:30+00:00\",\"2025-05-24T13:40+00:00\"],\"features\":[{\"type\":\"Feature\",\"geometry\":{\"type\":\"Point\",\"coordinates\":[15.410277777777779,47.04611111111111]},\"properties\":{\"parameters\":{\"TL\":{\"name\":\"Lufttemperatur\",\"unit\":\"Â°C\",\"data\":[13.3,13.5,13.9,13.7,14.0,13.6,14.1,13.9,14.2,13.9,14.0,14.0,13.8,13.8,13.3,13.0,13.0,12.9,12.9,12.8,12.6,12.6,12.7,12.5,12.2,12.1,12.1,11.7,11.4,11.2,11.0,10.9,10.7,10.4,10.3,10.2,10.1,10.1,10.2,10.1,9.9,9.8,9.8,10.0,10.1,10.2,10.1,10.1,10.1,10.1,10.1,10.0,10.0,9.7,9.4,9.0,8.7,8.4,8.1,7.8,7.6,7.5,7.4,7.5,7.6,7.5,7.1,6.7,6.6,6.4,6.6,6.3,6.1,6.0,5.9,6.2,6.4,6.2,5.9,5.7,5.5,5.3,5.2,5.1,5.3,5.5,5.7,6.0,6.4,7.0,7.4,7.8,8.1,8.4,9.6,10.1,10.4,10.5,11.1,12.0,12.3,12.5,12.6,13.6,14.7,15.1,15.0,15.7,15.4,15.5,15.7,15.1,14.8,14.5,16.0,15.2,16.0,16.2,15.9,15.9,16.0,16.1,16.9,16.6,16.4,16.3,17.0,16.7,16.5,17.4,17.1,17.3,17.5,17.4,17.7,18.2,17.9,19.4,17.8,17.7,17.8,17.9,18.6,17.8]},\"RR\":{\"name\":\"Niederschlag
             // der letzten 10
@@ -165,7 +165,7 @@ public class geosphereATAPI {
                         break;
                 }
             }
-            logger.info("adding data to map: " + weatherData.toString());
+            logger.debug("adding data to map: " + weatherData.toString());
             return weatherData;
         } catch (Exception e) {
             e.printStackTrace();
@@ -183,11 +183,11 @@ public class geosphereATAPI {
             String url = BASE_URL + "/timeseries/forecast/" + FCDATASET + "?lat_lon=" + locationLatLon
                     + "&parameters=rain_acc&parameters=t2m&parameters=rh2m&parameters=sp" + "&start="
                     + start_time.toString() + "&end=" + end_time.toString() + "&output_format=geojson";
-            logger.info("send forecast request: " + url);
+            logger.debug("send forecast request: " + url);
             HttpClient client = HttpClient.newHttpClient();
             HttpRequest req = HttpRequest.newBuilder().uri(URI.create(url)).build();
             HttpResponse<String> resp = client.send(req, HttpResponse.BodyHandlers.ofString());
-            logger.info("got response to forecast weather request: " + resp.body());
+            logger.debug("got response to forecast weather request: " + resp.body());
             // String resp =
             // "{\"reference_time\":\"2025-05-24T09:00+00:00\",\"media_type\":\"application/json\",\"type\":\"FeatureCollection\",\"version\":\"v1\",\"timestamps\":[\"2025-05-24T15:00+00:00\",\"2025-05-24T16:00+00:00\",\"2025-05-24T17:00+00:00\",\"2025-05-24T18:00+00:00\",\"2025-05-24T19:00+00:00\",\"2025-05-24T20:00+00:00\",\"2025-05-24T21:00+00:00\",\"2025-05-24T22:00+00:00\",\"2025-05-24T23:00+00:00\",\"2025-05-25T00:00+00:00\",\"2025-05-25T01:00+00:00\",\"2025-05-25T02:00+00:00\",\"2025-05-25T03:00+00:00\",\"2025-05-25T04:00+00:00\",\"2025-05-25T05:00+00:00\",\"2025-05-25T06:00+00:00\",\"2025-05-25T07:00+00:00\",\"2025-05-25T08:00+00:00\",\"2025-05-25T09:00+00:00\",\"2025-05-25T10:00+00:00\",\"2025-05-25T11:00+00:00\",\"2025-05-25T12:00+00:00\",\"2025-05-25T13:00+00:00\",\"2025-05-25T14:00+00:00\"],\"features\":[{\"type\":\"Feature\",\"geometry\":{\"type\":\"Point\",\"coordinates\":[15.465999999999852,47.049000000000156]},\"properties\":{\"parameters\":{\"rain_acc\":{\"name\":\"total
             // rainfall amount\",\"unit\":\"kg
@@ -239,7 +239,7 @@ public class geosphereATAPI {
                         break;
                 }
             }
-            logger.info("adding data to map: " + weatherData.toString());
+            logger.debug("adding data to map: " + weatherData.toString());
             return weatherData;
         } catch (Exception e) {
             e.printStackTrace();
