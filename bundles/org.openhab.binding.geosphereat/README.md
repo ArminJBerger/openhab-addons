@@ -1,25 +1,16 @@
 # geosphereAT Binding
 
-_Give some details about what this binding is meant for - a protocol, system, specific device._
-
-_If possible, provide some resources like pictures (only PNG is supported currently), a video, etc. to give an impression of what can be done with this binding._
-_You can place such resources into a `doc` folder next to this README.md._
-
-_Put each sentence in a separate line to improve readability of diffs._
+Fetches weather data for Austria from geosphere.at using a REST API (see https://dataset.api.hub.geosphere.at/v1/docs/).
+Provides the following data:
+- current weather data from a defined weather station
+- historic weather data for the past 24h from a defined weather statino
+- forecast weather data for the next 24h for a defined location (lat, lon)
 
 ## Supported Things
 
-_Please describe the different supported things / devices including their ThingTypeUID within this section._
-_Which different types are supported, which models were tested etc.?_
-_Note that it is planned to generate some part of this based on the XML files within ```src/main/resources/OH-INF/thing``` of your binding._
-
-- `bridge`: Short description of the Bridge, if any
-- `sample`: Short description of the Thing with the ThingTypeUID `sample`
-
-## Discovery
-
-_Describe the available auto-discovery features here._
-_Mention for what it works and what needs to be kept in mind when using it._
+- `weatherstation_current`: provides multiple channels with current weather data for a given weather station in Austria
+- `weatherstation_historic`: provides multiple channels with historic weather data for the past 24h for a given weather station in Austria
+- `weatherlocation_forecast`: provides multiple channels with forecast weather data for the next 24h for a given location (lat,lon) in Austria
 
 ## Binding Configuration
 
@@ -49,11 +40,11 @@ _Note that it is planned to generate some part of this based on the XML files wi
 
 ### `sample` Thing Configuration
 
-| Name            | Type    | Description                           | Default | Required | Advanced |
-|-----------------|---------|---------------------------------------|---------|----------|----------|
-| hostname        | text    | Hostname or IP address of the device  | N/A     | yes      | no       |
-| password        | text    | Password to access the device         | N/A     | yes      | no       |
-| refreshInterval | integer | Interval the device is polled in sec. | 600     | no       | yes      |
+| Name            | Type    | Description                                   | Default | Required | Advanced |
+|-----------------|---------|-----------------------------------------------|---------|----------|----------|
+| stationName     | text    | Name of the weather station                   | N/A     | yes      | no       |
+| locationLatLon  | text    | Location in as "Lat,Lon" for weather forecast | N/A     | yes      | no       |
+| refreshInterval | integer | Interval the REST API is polled in sec.       | 3600    | no       | no       |
 
 ## Channels
 
