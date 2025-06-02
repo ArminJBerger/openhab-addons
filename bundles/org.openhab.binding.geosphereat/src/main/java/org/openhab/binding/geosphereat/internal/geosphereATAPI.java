@@ -9,6 +9,7 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.locks.ReentrantLock;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,21 +26,31 @@ public class geosphereATAPI {
 
     private static final Map<String, Integer> weather_station_ids = new HashMap<>();
 
+    private static final ReentrantLock weather_station_query = new ReentrantLock();;
+
     public static boolean getWeatherStations(String locationName) {
+        Logger logger = LoggerFactory.getLogger(geosphereATHandler.class);
+
         try {
-            Logger logger = LoggerFactory.getLogger(geosphereATHandler.class);
+            weather_station_query.lock();
+
+            if (!weather_station_ids.isEmpty())
+                return true;
+
             String url = BASE_URL + "/station/current/" + DATASET + "/filter?name=" + locationName;
             logger.debug("send weather stations request: " + url);
             HttpClient client = HttpClient.newHttpClient();
             HttpRequest req = HttpRequest.newBuilder().uri(URI.create(url)).build();
             HttpResponse<String> resp = client.send(req, HttpResponse.BodyHandlers.ofString());
+            logger.debug("got response to weather station id request: " + resp.body());
 
-            JsonParser parser = new JsonParser();
-            JsonElement rootNode = parser.parse(resp.body());
-            JsonArray stations = rootNode.getAsJsonObject().getAsJsonArray("matching_stations");
+            JsonElement root_node = JsonParser.parseString(resp.body());
+            JsonArray stations = root_node.getAsJsonObject().getAsJsonArray("matching_stations");
 
-            if (stations.size() == 0)
+            if (stations.size() == 0) {
+                logger.error("no matching weather stations found for location: " + locationName);
                 return false;
+            }
 
             weather_station_ids.clear();
 
@@ -52,8 +63,11 @@ public class geosphereATAPI {
             logger.debug("weather_station_ids: " + weather_station_ids.toString());
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+            // e.printStackTrace();
+            logger.error(e.getMessage());
             return false;
+        } finally {
+            weather_station_query.unlock();
         }
     }
 

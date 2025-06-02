@@ -51,11 +51,9 @@ public class geosphereATHandlerFactory extends BaseThingHandlerFactory {
 
         if (THING_TYPE_WEATHERSTATION_CURRENT.equals(thingTypeUID)) {
             return new geosphereATHandler(thing);
-        }
-        if (THING_TYPE_WEATHERSTATION_HISTORIC.equals(thingTypeUID)) {
+        } else if (THING_TYPE_WEATHERSTATION_HISTORIC.equals(thingTypeUID)) {
             return new geosphereATHandler(thing);
-        }
-        if (THING_TYPE_WEATHERLOCATION_FORECAST.equals(thingTypeUID)) {
+        } else if (THING_TYPE_WEATHERLOCATION_FORECAST.equals(thingTypeUID)) {
             return new geosphereATHandler(thing);
         }
 

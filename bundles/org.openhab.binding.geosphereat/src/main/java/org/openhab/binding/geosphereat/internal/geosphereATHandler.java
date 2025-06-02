@@ -40,6 +40,9 @@ import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstan
 import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_LAST24H_TEMPERATURE_AVG;
 import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_LAST24H_TEMPERATURE_MAX;
 import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_LAST24H_TEMPERATURE_MIN;
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.THING_TYPE_WEATHERLOCATION_FORECAST;
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.THING_TYPE_WEATHERSTATION_CURRENT;
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.THING_TYPE_WEATHERSTATION_HISTORIC;
 
 import java.util.Map;
 import java.util.concurrent.Executors;
@@ -54,6 +57,7 @@ import org.openhab.core.thing.ChannelUID;
 import org.openhab.core.thing.Thing;
 import org.openhab.core.thing.ThingStatus;
 import org.openhab.core.thing.ThingStatusDetail;
+import org.openhab.core.thing.ThingTypeUID;
 import org.openhab.core.thing.binding.BaseThingHandler;
 import org.openhab.core.types.Command;
 import org.openhab.core.types.RefreshType;
@@ -72,7 +76,7 @@ import org.slf4j.LoggerFactory;
 public class geosphereATHandler extends BaseThingHandler {
 
     private final Logger logger = LoggerFactory.getLogger(geosphereATHandler.class);
-    private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(2);
+    private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
     private @Nullable ScheduledFuture<?> refreshJobCurrent;
 
     private @Nullable geosphereATConfiguration config;
@@ -87,9 +91,15 @@ public class geosphereATHandler extends BaseThingHandler {
     }
 
     private void updateWeatherData() {
-        updateCurrentWeatherData();
-        updateHistoricWeatherData();
-        updateForecastWeatherData();
+        ThingTypeUID thingTypeUID = thing.getThingTypeUID();
+
+        if (THING_TYPE_WEATHERSTATION_CURRENT.equals(thingTypeUID)) {
+            updateCurrentWeatherData();
+        } else if (THING_TYPE_WEATHERSTATION_HISTORIC.equals(thingTypeUID)) {
+            updateHistoricWeatherData();
+        } else if (THING_TYPE_WEATHERLOCATION_FORECAST.equals(thingTypeUID)) {
+            updateForecastWeatherData();
+        }
     }
 
     private void updateCurrentWeatherData() {
@@ -265,11 +275,11 @@ public class geosphereATHandler extends BaseThingHandler {
 
         // Example for background initialization:
         scheduler.execute(() -> {
-            boolean thingReachable = geosphereATAPI.getWeatherStations("GRAZ");
+            boolean apiReachable = geosphereATAPI.getWeatherStations("GRAZ");
 
             // <background task with long running initialization here>
             // when done do:
-            if (thingReachable) {
+            if (apiReachable) {
                 logger.debug("successfully retrieved weather station ids");
                 updateStatus(ThingStatus.ONLINE);
                 startAutomaticRefresh();
