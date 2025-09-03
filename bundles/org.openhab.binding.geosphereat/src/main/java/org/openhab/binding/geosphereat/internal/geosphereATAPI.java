@@ -119,6 +119,7 @@ public class geosphereATAPI {
         try {
             Instant now = Instant.now();
             Instant start_time = now.minus(1, ChronoUnit.DAYS);
+            Instant start_time_12h = start_time.plus(12, ChronoUnit.HOURS)
             Instant end_time = now;
 
             String url = BASE_URL + "/station/historical/" + DATASET + "?station_ids="
@@ -143,10 +144,17 @@ public class geosphereATAPI {
                 JsonObject para_object = para.getValue().getAsJsonObject();
                 JsonArray data = para_object.getAsJsonArray("data");
                 String unit = para_object.get("unit").getAsString();
+
                 Double sum = 0.0;
                 Double max = Double.MIN_VALUE;
                 Double min = Double.MAX_VALUE;
                 Integer cnt = 0;
+
+                Double sum_12h = 0.0;
+                Double max_12h = Double.MIN_VALUE;
+                Double min_12h = Double.MAX_VALUE;
+                Integer cnt_12h = 0;
+
                 for (int i = 0; i < timestamps.size(); ++i) {
                     Double value;
                     JsonElement val = data.get(i);
@@ -160,6 +168,15 @@ public class geosphereATAPI {
                         max = value;
                     if (value < min)
                         min = value;
+                    
+                    if (timestamps.at(i) >= start_time_12h)
+                        sum_12h += value;
+                        cnt_12h++;
+                        if (value > max_12h)
+                            max_12h = value;
+                        if (value < min_12h)
+                            min_12h = value
+                        
                 }
                 switch (para.getKey()) {
                     case "TL":
@@ -168,10 +185,16 @@ public class geosphereATAPI {
                         weatherData.put(para.getKey() + "_MAX", max);
                         weatherData.put(para.getKey() + "_MIN", min);
                         weatherData.put(para.getKey() + "_AVG", sum / cnt);
+
+                        weatherData.put(para.getKey() + "_MAX_12H", max_12h);
+                        weatherData.put(para.getKey() + "_MIN_12H", min_12h);
+                        weatherData.put(para.getKey() + "_AVG_12H", sum_12h / cnt_12h);
                         break;
                     case "RR":
                     case "SO":
                         weatherData.put(para.getKey() + "_ACC", sum);
+
+                        weatherData.put(para.getKey() + "_ACC_12H", sum_12h);
                         break;
                 }
             }
@@ -190,9 +213,10 @@ public class geosphereATAPI {
             Instant now = Instant.now();
             Instant start_time = now;
             Instant end_time = now.plus(1, ChronoUnit.DAYS);
+            Instant end_time_12h = end_time.minus(12, ChronoUnit.HOURS);
 
             String url = BASE_URL + "/timeseries/forecast/" + FCDATASET + "?lat_lon=" + locationLatLon
-                    + "&parameters=rain_acc&parameters=t2m&parameters=rh2m&parameters=sp" + "&start="
+                    + "&parameters=rain_acc&parameters=t2m&parameters=rh2m&parameters=sp&parameters=tcc" + "&start="
                     + start_time.toString() + "&end=" + end_time.toString() + "&output_format=geojson";
             logger.debug("send forecast request: " + url);
             HttpClient client = HttpClient.newHttpClient();
@@ -212,10 +236,17 @@ public class geosphereATAPI {
                 JsonObject para_object = para.getValue().getAsJsonObject();
                 JsonArray data = para_object.getAsJsonArray("data");
                 String unit = para_object.get("unit").getAsString();
+
                 Double sum = 0.0;
                 Double max = Double.MIN_VALUE;
                 Double min = Double.MAX_VALUE;
                 Integer cnt = 0;
+
+                Double sum_12h = 0.0;
+                Double max_12h = Double.MIN_VALUE;
+                Double min_12h = Double.MAX_VALUE;
+                Integer cnt_12h = 0;
+                
                 for (int i = 0; i < timestamps.size(); ++i) {
                     Double value;
                     JsonElement val = data.get(i);
@@ -229,6 +260,14 @@ public class geosphereATAPI {
                         max = value;
                     if (value < min)
                         min = value;
+                    
+                    if (timestamps.at(i) <= end_time_12h)
+                        sum_12h += value;
+                        cnt_12h++;
+                        if (value > max_12h)
+                            max_12h = value;
+                        if (value < min_12h)
+                            min_12h = value;
                 }
                 switch (para.getKey()) {
                     case "t2m":
@@ -236,14 +275,18 @@ public class geosphereATAPI {
                         weatherData.put(para.getKey() + "_MAX", max);
                         weatherData.put(para.getKey() + "_MIN", min);
                         weatherData.put(para.getKey() + "_AVG", sum / cnt);
+                        
+                        weatherData.put(para.getKey() + "_MAX_12H", max_12h);
+                        weatherData.put(para.getKey() + "_MIN_12H", min_12h);
+                        weatherData.put(para.getKey() + "_AVG_12H", sum_12h / cnt_12h);
                         break;
                     case "sp":
-                        weatherData.put(para.getKey() + "_MAX", max / 100.0);
-                        weatherData.put(para.getKey() + "_MIN", min / 100.0);
-                        weatherData.put(para.getKey() + "_AVG", sum / cnt / 100.0);
+                        weatherData.put(para.getKey() + "_MAX_12H", max_12h / 100.0);
+                        weatherData.put(para.getKey() + "_MIN_12H", min_12h / 100.0);
+                        weatherData.put(para.getKey() + "_AVG_12H", sum_12h / cnt_12h / 100.0);
                         break;
                     case "rain_acc":
-                        weatherData.put(para.getKey() + "_ACC", sum);
+                        weatherData.put(para.getKey() + "_ACC_12H", sum_12h);
                         break;
                 }
             }

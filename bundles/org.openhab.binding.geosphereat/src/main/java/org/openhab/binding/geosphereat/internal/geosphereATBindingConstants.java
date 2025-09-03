@@ -64,4 +64,28 @@ public class geosphereATBindingConstants {
     public static final String CHANNEL_FORECAST24H_HUMIDITY_MAX = "forecast24h_humidity_max";
     public static final String CHANNEL_FORECAST24H_HUMIDITY_AVG = "forecast24h_humidity_avg";
     public static final String CHANNEL_FORECAST24H_SUNSHINE_ACC = "forecast24h_sunshine_acc";
+
+    public static final String CHANNEL_LAST12H_TEMPERATURE_MIN = "last12h_temperature_min";
+    public static final String CHANNEL_LAST12H_TEMPERATURE_MAX = "last12h_temperature_max";
+    public static final String CHANNEL_LAST12H_TEMPERATURE_AVG = "last12h_temperature_avg";
+    public static final String CHANNEL_LAST12H_PRECIPITATION_ACC = "last12h_precipitation_acc";
+    public static final String CHANNEL_LAST12H_PRESSURE_MIN = "last12h_pressure_min";
+    public static final String CHANNEL_LAST12H_PRESSURE_MAX = "last12h_pressure_max";
+    public static final String CHANNEL_LAST12H_PRESSURE_AVG = "last12h_pressure_avg";
+    public static final String CHANNEL_LAST12H_HUMIDITY_MIN = "last12h_humidity_min";
+    public static final String CHANNEL_LAST12H_HUMIDITY_MAX = "last12h_humidity_max";
+    public static final String CHANNEL_LAST12H_HUMIDITY_AVG = "last12h_humidity_avg";
+    public static final String CHANNEL_LAST12H_SUNSHINE_ACC = "last12h_sunshine_acc";
+
+    public static final String CHANNEL_FORECAST12H_TEMPERATURE_MIN = "forecast12h_temperature_min";
+    public static final String CHANNEL_FORECAST12H_TEMPERATURE_MAX = "forecast12h_temperature_max";
+    public static final String CHANNEL_FORECAST12H_TEMPERATURE_AVG = "forecast12h_temperature_avg";
+    public static final String CHANNEL_FORECAST12H_PRECIPITATION_ACC = "forecast12h_precipitation_acc";
+    public static final String CHANNEL_FORECAST12H_PRESSURE_MIN = "forecast12h_pressure_min";
+    public static final String CHANNEL_FORECAST12H_PRESSURE_MAX = "forecast12h_pressure_max";
+    public static final String CHANNEL_FORECAST12H_PRESSURE_AVG = "forecast12h_pressure_avg";
+    public static final String CHANNEL_FORECAST12H_HUMIDITY_MIN = "forecast12h_humidity_min";
+    public static final String CHANNEL_FORECAST12H_HUMIDITY_MAX = "forecast12h_humidity_max";
+    public static final String CHANNEL_FORECAST12H_HUMIDITY_AVG = "forecast12h_humidity_avg";
+    public static final String CHANNEL_FORECAST12H_SUNSHINE_ACC = "forecast12h_sunshine_acc";
 }

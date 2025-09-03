@@ -18,6 +18,7 @@ import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstan
 import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_CURRENT_PRESSURE;
 import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_CURRENT_SUNSHINE;
 import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_CURRENT_TEMPERATURE;
+
 import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_FORECAST24H_HUMIDITY_AVG;
 import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_FORECAST24H_HUMIDITY_MAX;
 import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_FORECAST24H_HUMIDITY_MIN;
@@ -29,6 +30,7 @@ import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstan
 import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_FORECAST24H_TEMPERATURE_AVG;
 import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_FORECAST24H_TEMPERATURE_MAX;
 import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_FORECAST24H_TEMPERATURE_MIN;
+
 import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_LAST24H_HUMIDITY_AVG;
 import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_LAST24H_HUMIDITY_MAX;
 import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_LAST24H_HUMIDITY_MIN;
@@ -40,6 +42,31 @@ import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstan
 import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_LAST24H_TEMPERATURE_AVG;
 import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_LAST24H_TEMPERATURE_MAX;
 import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_LAST24H_TEMPERATURE_MIN;
+
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_FORECAST12H_HUMIDITY_AVG;
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_FORECAST12H_HUMIDITY_MAX;
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_FORECAST12H_HUMIDITY_MIN;
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_FORECAST12H_PRECIPITATION_ACC;
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_FORECAST12H_PRESSURE_AVG;
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_FORECAST12H_PRESSURE_MAX;
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_FORECAST12H_PRESSURE_MIN;
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_FORECAST12H_SUNSHINE_ACC;
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_FORECAST12H_TEMPERATURE_AVG;
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_FORECAST12H_TEMPERATURE_MAX;
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_FORECAST12H_TEMPERATURE_MIN;
+
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_LAST12H_HUMIDITY_AVG;
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_LAST12H_HUMIDITY_MAX;
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_LAST12H_HUMIDITY_MIN;
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_LAST12H_PRECIPITATION_ACC;
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_LAST12H_PRESSURE_AVG;
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_LAST12H_PRESSURE_MAX;
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_LAST12H_PRESSURE_MIN;
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_LAST12H_SUNSHINE_ACC;
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_LAST12H_TEMPERATURE_AVG;
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_LAST12H_TEMPERATURE_MAX;
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_LAST12H_TEMPERATURE_MIN;
+
 import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.THING_TYPE_WEATHERLOCATION_FORECAST;
 import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.THING_TYPE_WEATHERSTATION_CURRENT;
 import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.THING_TYPE_WEATHERSTATION_HISTORIC;
@@ -196,6 +223,62 @@ public class geosphereATHandler extends BaseThingHandler {
             state = new DecimalType(value.doubleValue());
         }
         updateState(CHANNEL_LAST24H_SUNSHINE_ACC, state);
+
+        if (data != null) {
+            value = data.get("TL_MIN_12H");
+            state = new DecimalType(value.doubleValue());
+        }
+        updateState(CHANNEL_LAST12H_TEMPERATURE_MIN, state);
+        if (data != null) {
+            value = data.get("TL_MAX_12H");
+            state = new DecimalType(value.doubleValue());
+        }
+        updateState(CHANNEL_LAST12H_TEMPERATURE_MAX, state);
+        if (data != null) {
+            value = data.get("TL_AVG_12H");
+            state = new DecimalType(value.doubleValue());
+        }
+        updateState(CHANNEL_LAST12H_TEMPERATURE_AVG, state);
+        if (data != null) {
+            value = data.get("RF_MIN_12H");
+            state = new DecimalType(value.doubleValue());
+        }
+        updateState(CHANNEL_LAST12H_HUMIDITY_MIN, state);
+        if (data != null) {
+            value = data.get("RF_MAX_12H");
+            state = new DecimalType(value.doubleValue());
+        }
+        updateState(CHANNEL_LAST12H_HUMIDITY_MAX, state);
+        if (data != null) {
+            value = data.get("RF_AVG_12H");
+            state = new DecimalType(value.doubleValue());
+        }
+        updateState(CHANNEL_LAST12H_HUMIDITY_AVG, state);
+        if (data != null) {
+            value = data.get("P_MIN_12H");
+            state = new DecimalType(value.doubleValue());
+        }
+        updateState(CHANNEL_LAST12H_PRESSURE_MIN, state);
+        if (data != null) {
+            value = data.get("P_MAX_12H");
+            state = new DecimalType(value.doubleValue());
+        }
+        updateState(CHANNEL_LAST12H_PRESSURE_MAX, state);
+        if (data != null) {
+            value = data.get("P_AVG_12H");
+            state = new DecimalType(value.doubleValue());
+        }
+        updateState(CHANNEL_LAST12H_PRESSURE_AVG, state);
+        if (data != null) {
+            value = data.get("RR_ACC_12H");
+            state = new DecimalType(value.doubleValue());
+        }
+        updateState(CHANNEL_LAST12H_PRECIPITATION_ACC, state);
+        if (data != null) {
+            value = data.get("SO_ACC_12H");
+            state = new DecimalType(value.doubleValue());
+        }
+        updateState(CHANNEL_LAST12H_SUNSHINE_ACC, state);
     }
 
     private void updateForecastWeatherData() {
@@ -256,6 +339,59 @@ public class geosphereATHandler extends BaseThingHandler {
         updateState(CHANNEL_FORECAST24H_PRECIPITATION_ACC, state);
         state = UnDefType.UNDEF;
         updateState(CHANNEL_FORECAST24H_SUNSHINE_ACC, state);
+
+        if (data != null) {
+            value = data.get("t2m_MIN_12H");
+            state = new DecimalType(value.doubleValue());
+        }
+        updateState(CHANNEL_FORECAST12H_TEMPERATURE_MIN, state);
+        if (data != null) {
+            value = data.get("t2m_MAX_12H");
+            state = new DecimalType(value.doubleValue());
+        }
+        updateState(CHANNEL_FORECAST12H_TEMPERATURE_MAX, state);
+        if (data != null) {
+            value = data.get("t2m_AVG_12H");
+            state = new DecimalType(value.doubleValue());
+        }
+        updateState(CHANNEL_FORECAST12H_TEMPERATURE_AVG, state);
+        if (data != null) {
+            value = data.get("rh2m_MIN_12H");
+            state = new DecimalType(value.doubleValue());
+        }
+        updateState(CHANNEL_FORECAST12H_HUMIDITY_MIN, state);
+        if (data != null) {
+            value = data.get("rh2m_MAX_12H");
+            state = new DecimalType(value.doubleValue());
+        }
+        updateState(CHANNEL_FORECAST12H_HUMIDITY_MAX, state);
+        if (data != null) {
+            value = data.get("rh2m_AVG_12H");
+            state = new DecimalType(value.doubleValue());
+        }
+        updateState(CHANNEL_FORECAST12H_HUMIDITY_AVG, state);
+        if (data != null) {
+            value = data.get("sp_MIN_12H");
+            state = new DecimalType(value.doubleValue());
+        }
+        updateState(CHANNEL_FORECAST12H_PRESSURE_MIN, state);
+        if (data != null) {
+            value = data.get("sp_MAX_12H");
+            state = new DecimalType(value.doubleValue());
+        }
+        updateState(CHANNEL_FORECAST12H_PRESSURE_MAX, state);
+        if (data != null) {
+            value = data.get("sp_AVG_12H");
+            state = new DecimalType(value.doubleValue());
+        }
+        updateState(CHANNEL_FORECAST12H_PRESSURE_AVG, state);
+        if (data != null) {
+            value = data.get("rain_acc_ACC_12H");
+            state = new DecimalType(value.doubleValue());
+        }
+        updateState(CHANNEL_FORECAST12H_PRECIPITATION_ACC, state);
+        state = UnDefType.UNDEF;
+        updateState(CHANNEL_FORECAST12H_SUNSHINE_ACC, state);
     }
 
     @Override

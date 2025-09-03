@@ -61,6 +61,18 @@
 			<channel id="last24h_pressure_avg" typeId="last24h_pressure"/>
 			<channel id="last24h_precipitation_acc" typeId="last24h_precipitation"/>
 			<channel id="last24h_sunshine_acc" typeId="last24h_sunshine"/>
+
+			<channel id="last12h_temperature_min" typeId="last12h_temperature"/>
+			<channel id="last12h_temperature_max" typeId="last12h_temperature"/>
+			<channel id="last12h_temperature_avg" typeId="last12h_temperature"/>
+			<channel id="last12h_humidity_min" typeId="last12h_humidity"/>
+			<channel id="last12h_humidity_max" typeId="last12h_humidity"/>
+			<channel id="last12h_humidity_avg" typeId="last12h_humidity"/>
+			<channel id="last12h_pressure_min" typeId="last12h_pressure"/>
+			<channel id="last12h_pressure_max" typeId="last12h_pressure"/>
+			<channel id="last12h_pressure_avg" typeId="last12h_pressure"/>
+			<channel id="last12h_precipitation_acc" typeId="last12h_precipitation"/>
+			<channel id="last12h_sunshine_acc" typeId="last12h_sunshine"/>
 		</channels>
 
 		<config-description>
@@ -102,6 +114,18 @@
 			<channel id="forecast24h_pressure_avg" typeId="forecast24h_pressure"/>
 			<channel id="forecast24h_precipitation_acc" typeId="forecast24h_precipitation"/>
 			<channel id="forecast24h_sunshine_acc" typeId="forecast24h_sunshine"/>
+
+			<channel id="forecast12h_temperature_min" typeId="forecast12h_temperatur"/>
+            <channel id="forecast12h_temperature_max" typeId="forecast12h_temperatur"/>
+            <channel id="forecast12h_temperature_avg" typeId="forecast12h_temperatur"/>
+            <channel id="forecast12h_humidity_min" typeId="forecast12h_humidity"/>
+            <channel id="forecast12h_humidity_max" typeId="forecast12h_humidity"/>
+            <channel id="forecast12h_humidity_avg" typeId="forecast12h_humidity"/>
+            <channel id="forecast12h_pressure_min" typeId="forecast12h_pressure"/>
+            <channel id="forecast12h_pressure_max" typeId="forecast12h_pressure"/>
+            <channel id="forecast12h_pressure_avg" typeId="forecast12h_pressure"/>
+            <channel id="forecast12h_precipitation_acc" typeId="forecast12h_precipitation"/>
+            <channel id="forecast12h_sunshine_acc" typeId="forecast12h_sunshine"/>
 		</channels>
 
 		<config-description>
@@ -174,6 +198,31 @@
 		<label>Acc. Sunshine in past 24h</label><!-- Use uppercase words, except prepositions. 2-3 words, max 25 chars -->
 		<description>Historic Sunshine channel for geosphereAT data</description>
 	</channel-type>
+	<channel-type id="last12h_temperature">
+		<item-type>Number:Temperature</item-type>
+		<label>Max. Temperature in past 12h</label><!-- Use uppercase words, except prepositions. 2-3 words, max 25 chars -->
+		<description>Historic Temperature channel for geosphereAT data</description>
+	</channel-type>
+	<channel-type id="last12h_humidity">
+		<item-type>Number:Humidity</item-type>
+		<label>Avg. Humidity in past 12h</label><!-- Use uppercase words, except prepositions. 2-3 words, max 25 chars -->
+		<description>Historic Humidity channel for geosphereAT data</description>
+	</channel-type>
+	<channel-type id="last12h_pressure">
+		<item-type>Number:Pressure</item-type>
+		<label>Avg. Pressure in past 12h</label><!-- Use uppercase words, except prepositions. 2-3 words, max 25 chars -->
+		<description>Historic Pressure channel for geosphereAT data</description>
+	</channel-type>
+	<channel-type id="last12h_precipitation">
+		<item-type>Number</item-type>
+		<label>Acc. Precipitation in past 12h</label><!-- Use uppercase words, except prepositions. 2-3 words, max 25 chars -->
+		<description>Historic Precipitation channel for geosphereAT data</description>
+	</channel-type>
+	<channel-type id="last12h_sunshine">
+		<item-type>Number</item-type>
+		<label>Acc. Sunshine in past 12h</label><!-- Use uppercase words, except prepositions. 2-3 words, max 25 chars -->
+		<description>Historic Sunshine channel for geosphereAT data</description>
+	</channel-type>
 
 	<channel-type id="forecast24h_temperature">
 		<item-type>Number:Temperature</item-type>
@@ -198,6 +247,31 @@
 	<channel-type id="forecast24h_sunshine">
 		<item-type>Number</item-type>
 		<label>Acc. Sunshine in next 24h</label><!-- Use uppercase words, except prepositions. 2-3 words, max 25 chars -->
+		<description>Forecast Sunshine channel for geosphereAT data</description>
+	</channel-type>
+	<channel-type id="forecast12h_temperature">
+		<item-type>Number:Temperature</item-type>
+		<label>Max. Temperature in next 12h</label><!-- Use uppercase words, except prepositions. 2-3 words, max 25 chars -->
+		<description>Forecast Temperature channel for geosphereAT data</description>
+	</channel-type>
+	<channel-type id="forecast12h_humidity">
+		<item-type>Number:Humidity</item-type>
+		<label>Avg. Humidity in next 12h</label><!-- Use uppercase words, except prepositions. 2-3 words, max 25 chars -->
+		<description>Forecast Humidity channel for geosphereAT data</description>
+	</channel-type>
+	<channel-type id="forecast12h_pressure">
+		<item-type>Number:Pressure</item-type>
+		<label>Avg. Pressure in next 12h</label><!-- Use uppercase words, except prepositions. 2-3 words, max 25 chars -->
+		<description>Forecast Pressure channel for geosphereAT data</description>
+	</channel-type>
+	<channel-type id="forecast12h_precipitation">
+		<item-type>Number</item-type>
+		<label>Acc. Precipitation in next 12h</label><!-- Use uppercase words, except prepositions. 2-3 words, max 25 chars -->
+		<description>Forecast Precipitation channel for geosphereAT data</description>
+	</channel-type>
+	<channel-type id="forecast12h_sunshine">
+		<item-type>Number</item-type>
+		<label>Acc. Sunshine in next 12h</label><!-- Use uppercase words, except prepositions. 2-3 words, max 25 chars -->
 		<description>Forecast Sunshine channel for geosphereAT data</description>
 	</channel-type>
 </thing:thing-descriptions>
