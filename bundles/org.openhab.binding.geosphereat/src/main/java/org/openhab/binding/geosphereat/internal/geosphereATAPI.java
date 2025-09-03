@@ -37,7 +37,8 @@ public class geosphereATAPI {
             if (!weather_station_ids.isEmpty())
                 return true;
 
-            String url = BASE_URL + "/station/current/" + DATASET + "/filter?name=" + locationName;
+            String url = BASE_URL + "/station/current/" + DATASET + "/filter?name=" + locationName
+                    + "&output_format=geojson";
             logger.debug("send weather stations request: " + url);
             HttpClient client = HttpClient.newHttpClient();
             HttpRequest req = HttpRequest.newBuilder().uri(URI.create(url)).build();
