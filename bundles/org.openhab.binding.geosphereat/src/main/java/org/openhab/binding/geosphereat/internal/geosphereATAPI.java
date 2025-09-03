@@ -120,7 +120,7 @@ public class geosphereATAPI {
         try {
             Instant now = Instant.now();
             Instant start_time = now.minus(1, ChronoUnit.DAYS);
-            Instant start_time_12h = start_time.plus(12, ChronoUnit.HOURS)
+            Instant start_time_12h = now.minus(12, ChronoUnit.HOURS);
             Instant end_time = now;
 
             String url = BASE_URL + "/station/historical/" + DATASET + "?station_ids="
@@ -170,14 +170,15 @@ public class geosphereATAPI {
                     if (value < min)
                         min = value;
                     
-                    if (timestamps.at(i) >= start_time_12h)
+                    Instant ts = Instant.parse(timestamps.get(i).getAsString());
+                    if (ts.isAfter(start_time_12h)) {
                         sum_12h += value;
                         cnt_12h++;
                         if (value > max_12h)
                             max_12h = value;
                         if (value < min_12h)
-                            min_12h = value
-                        
+                            min_12h = value;
+                    }
                 }
                 switch (para.getKey()) {
                     case "TL":
@@ -214,7 +215,7 @@ public class geosphereATAPI {
             Instant now = Instant.now();
             Instant start_time = now;
             Instant end_time = now.plus(1, ChronoUnit.DAYS);
-            Instant end_time_12h = end_time.minus(12, ChronoUnit.HOURS);
+            Instant end_time_12h = now.plus(12, ChronoUnit.HOURS);
 
             String url = BASE_URL + "/timeseries/forecast/" + FCDATASET + "?lat_lon=" + locationLatLon
                     + "&parameters=rain_acc&parameters=t2m&parameters=rh2m&parameters=sp&parameters=tcc" + "&start="
@@ -262,16 +263,19 @@ public class geosphereATAPI {
                     if (value < min)
                         min = value;
                     
-                    if (timestamps.at(i) <= end_time_12h)
+                    Instant ts = Instant.parse(timestamps.get(i).getAsString());
+                    if (ts.isBefore(end_time_12h)) {
                         sum_12h += value;
                         cnt_12h++;
                         if (value > max_12h)
                             max_12h = value;
                         if (value < min_12h)
                             min_12h = value;
+                    }
                 }
                 switch (para.getKey()) {
                     case "t2m":
+                    case "tcc":
                     case "rh2m":
                         weatherData.put(para.getKey() + "_MAX", max);
                         weatherData.put(para.getKey() + "_MIN", min);
