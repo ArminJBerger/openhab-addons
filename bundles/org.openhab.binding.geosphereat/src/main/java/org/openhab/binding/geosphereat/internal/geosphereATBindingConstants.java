@@ -40,6 +40,7 @@ public class geosphereATBindingConstants {
     public static final String CHANNEL_CURRENT_PRESSURE = "current_pressure";
     public static final String CHANNEL_CURRENT_HUMIDITY = "current_humidity";
     public static final String CHANNEL_CURRENT_SUNSHINE = "current_sunshine";
+    public static final String CHANNEL_CURRENT_RADIATION = "current_radiation";
 
     public static final String CHANNEL_LAST24H_TEMPERATURE_MIN = "last24h_temperature_min";
     public static final String CHANNEL_LAST24H_TEMPERATURE_MAX = "last24h_temperature_max";
@@ -52,6 +53,9 @@ public class geosphereATBindingConstants {
     public static final String CHANNEL_LAST24H_HUMIDITY_MAX = "last24h_humidity_max";
     public static final String CHANNEL_LAST24H_HUMIDITY_AVG = "last24h_humidity_avg";
     public static final String CHANNEL_LAST24H_SUNSHINE_ACC = "last24h_sunshine_acc";
+    public static final String CHANNEL_LAST24H_RADIATION_MIN = "last24h_radiation_min";
+    public static final String CHANNEL_LAST24H_RADIATION_MAX = "last24h_radiation_max";
+    public static final String CHANNEL_LAST24H_RADIATION_AVG = "last24h_radiation_avg";
 
     public static final String CHANNEL_FORECAST24H_TEMPERATURE_MIN = "forecast24h_temperature_min";
     public static final String CHANNEL_FORECAST24H_TEMPERATURE_MAX = "forecast24h_temperature_max";
@@ -64,6 +68,9 @@ public class geosphereATBindingConstants {
     public static final String CHANNEL_FORECAST24H_HUMIDITY_MAX = "forecast24h_humidity_max";
     public static final String CHANNEL_FORECAST24H_HUMIDITY_AVG = "forecast24h_humidity_avg";
     public static final String CHANNEL_FORECAST24H_SUNSHINE_ACC = "forecast24h_sunshine_acc";
+    public static final String CHANNEL_FORECAST24H_RADIATION_MIN = "forecast24h_radiation_min";
+    public static final String CHANNEL_FORECAST24H_RADIATION_MAX = "forecast24h_radiation_max";
+    public static final String CHANNEL_FORECAST24H_RADIATION_AVG = "forecast24h_radiation_avg";
 
     public static final String CHANNEL_LAST12H_TEMPERATURE_MIN = "last12h_temperature_min";
     public static final String CHANNEL_LAST12H_TEMPERATURE_MAX = "last12h_temperature_max";
@@ -76,6 +83,9 @@ public class geosphereATBindingConstants {
     public static final String CHANNEL_LAST12H_HUMIDITY_MAX = "last12h_humidity_max";
     public static final String CHANNEL_LAST12H_HUMIDITY_AVG = "last12h_humidity_avg";
     public static final String CHANNEL_LAST12H_SUNSHINE_ACC = "last12h_sunshine_acc";
+    public static final String CHANNEL_LAST12H_RADIATION_MIN = "last12h_radiation_min";
+    public static final String CHANNEL_LAST12H_RADIATION_MAX = "last12h_radiation_max";
+    public static final String CHANNEL_LAST12H_RADIATION_AVG = "last12h_radiation_avg";
 
     public static final String CHANNEL_FORECAST12H_TEMPERATURE_MIN = "forecast12h_temperature_min";
     public static final String CHANNEL_FORECAST12H_TEMPERATURE_MAX = "forecast12h_temperature_max";
@@ -88,4 +98,14 @@ public class geosphereATBindingConstants {
     public static final String CHANNEL_FORECAST12H_HUMIDITY_MAX = "forecast12h_humidity_max";
     public static final String CHANNEL_FORECAST12H_HUMIDITY_AVG = "forecast12h_humidity_avg";
     public static final String CHANNEL_FORECAST12H_SUNSHINE_ACC = "forecast12h_sunshine_acc";
+    public static final String CHANNEL_FORECAST12H_RADIATION_MIN = "forecast12h_radiation_min";
+    public static final String CHANNEL_FORECAST12H_RADIATION_MAX = "forecast12h_radiation_max";
+    public static final String CHANNEL_FORECAST12H_RADIATION_AVG = "forecast12h_radiation_avg";
+
+    public static final String CHANNEL_FORECAST_CLOUDINESS = "forecast_cloudiness";
+    public static final String CHANNEL_FORECAST_CLOUDINESS_1H = "forecast_cloudiness_1h";
+    public static final String CHANNEL_FORECAST_CLOUDINESS_2H = "forecast_cloudiness_2h";
+    public static final String CHANNEL_FORECAST_RADIATION = "forecast_radiation";
+    public static final String CHANNEL_FORECAST_RADIATION_1H = "forecast_radiation_1h";
+    public static final String CHANNEL_FORECAST_RADIATION_2H = "forecast_radiation_2h";
 }

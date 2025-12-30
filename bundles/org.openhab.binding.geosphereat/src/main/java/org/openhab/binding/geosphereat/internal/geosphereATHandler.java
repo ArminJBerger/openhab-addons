@@ -16,33 +16,9 @@ import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstan
 import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_CURRENT_HUMIDITY;
 import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_CURRENT_PRECIPITATION;
 import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_CURRENT_PRESSURE;
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_CURRENT_RADIATION;
 import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_CURRENT_SUNSHINE;
 import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_CURRENT_TEMPERATURE;
-
-import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_FORECAST24H_HUMIDITY_AVG;
-import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_FORECAST24H_HUMIDITY_MAX;
-import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_FORECAST24H_HUMIDITY_MIN;
-import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_FORECAST24H_PRECIPITATION_ACC;
-import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_FORECAST24H_PRESSURE_AVG;
-import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_FORECAST24H_PRESSURE_MAX;
-import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_FORECAST24H_PRESSURE_MIN;
-import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_FORECAST24H_SUNSHINE_ACC;
-import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_FORECAST24H_TEMPERATURE_AVG;
-import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_FORECAST24H_TEMPERATURE_MAX;
-import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_FORECAST24H_TEMPERATURE_MIN;
-
-import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_LAST24H_HUMIDITY_AVG;
-import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_LAST24H_HUMIDITY_MAX;
-import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_LAST24H_HUMIDITY_MIN;
-import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_LAST24H_PRECIPITATION_ACC;
-import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_LAST24H_PRESSURE_AVG;
-import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_LAST24H_PRESSURE_MAX;
-import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_LAST24H_PRESSURE_MIN;
-import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_LAST24H_SUNSHINE_ACC;
-import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_LAST24H_TEMPERATURE_AVG;
-import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_LAST24H_TEMPERATURE_MAX;
-import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_LAST24H_TEMPERATURE_MIN;
-
 import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_FORECAST12H_HUMIDITY_AVG;
 import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_FORECAST12H_HUMIDITY_MAX;
 import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_FORECAST12H_HUMIDITY_MIN;
@@ -50,11 +26,33 @@ import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstan
 import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_FORECAST12H_PRESSURE_AVG;
 import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_FORECAST12H_PRESSURE_MAX;
 import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_FORECAST12H_PRESSURE_MIN;
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_FORECAST12H_RADIATION_AVG;
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_FORECAST12H_RADIATION_MAX;
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_FORECAST12H_RADIATION_MIN;
 import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_FORECAST12H_SUNSHINE_ACC;
 import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_FORECAST12H_TEMPERATURE_AVG;
 import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_FORECAST12H_TEMPERATURE_MAX;
 import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_FORECAST12H_TEMPERATURE_MIN;
-
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_FORECAST24H_HUMIDITY_AVG;
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_FORECAST24H_HUMIDITY_MAX;
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_FORECAST24H_HUMIDITY_MIN;
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_FORECAST24H_PRECIPITATION_ACC;
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_FORECAST24H_PRESSURE_AVG;
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_FORECAST24H_PRESSURE_MAX;
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_FORECAST24H_PRESSURE_MIN;
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_FORECAST24H_RADIATION_AVG;
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_FORECAST24H_RADIATION_MAX;
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_FORECAST24H_RADIATION_MIN;
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_FORECAST24H_SUNSHINE_ACC;
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_FORECAST24H_TEMPERATURE_AVG;
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_FORECAST24H_TEMPERATURE_MAX;
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_FORECAST24H_TEMPERATURE_MIN;
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_FORECAST_CLOUDINESS;
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_FORECAST_CLOUDINESS_1H;
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_FORECAST_CLOUDINESS_2H;
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_FORECAST_RADIATION;
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_FORECAST_RADIATION_1H;
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_FORECAST_RADIATION_2H;
 import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_LAST12H_HUMIDITY_AVG;
 import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_LAST12H_HUMIDITY_MAX;
 import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_LAST12H_HUMIDITY_MIN;
@@ -62,16 +60,35 @@ import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstan
 import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_LAST12H_PRESSURE_AVG;
 import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_LAST12H_PRESSURE_MAX;
 import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_LAST12H_PRESSURE_MIN;
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_LAST12H_RADIATION_AVG;
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_LAST12H_RADIATION_MAX;
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_LAST12H_RADIATION_MIN;
 import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_LAST12H_SUNSHINE_ACC;
 import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_LAST12H_TEMPERATURE_AVG;
 import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_LAST12H_TEMPERATURE_MAX;
 import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_LAST12H_TEMPERATURE_MIN;
-
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_LAST24H_HUMIDITY_AVG;
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_LAST24H_HUMIDITY_MAX;
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_LAST24H_HUMIDITY_MIN;
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_LAST24H_PRECIPITATION_ACC;
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_LAST24H_PRESSURE_AVG;
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_LAST24H_PRESSURE_MAX;
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_LAST24H_PRESSURE_MIN;
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_LAST24H_RADIATION_AVG;
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_LAST24H_RADIATION_MAX;
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_LAST24H_RADIATION_MIN;
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_LAST24H_SUNSHINE_ACC;
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_LAST24H_TEMPERATURE_AVG;
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_LAST24H_TEMPERATURE_MAX;
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.CHANNEL_LAST24H_TEMPERATURE_MIN;
 import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.THING_TYPE_WEATHERLOCATION_FORECAST;
 import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.THING_TYPE_WEATHERSTATION_CURRENT;
 import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.THING_TYPE_WEATHERSTATION_HISTORIC;
 
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.Map;
+import java.util.SortedMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
@@ -131,35 +148,52 @@ public class geosphereATHandler extends BaseThingHandler {
 
     private void updateCurrentWeatherData() {
         Map<String, Number> data = geosphereATAPI.getCurrentWeather(config.stationName);
-        State state = UnDefType.UNDEF;
+        State state;
         @Nullable
         Number value;
 
         if (data != null) {
             value = data.get("TL");
             state = new DecimalType(value.doubleValue());
+        } else {
+            state = UnDefType.UNDEF;
         }
         updateState(CHANNEL_CURRENT_TEMPERATURE, state);
         if (data != null) {
             value = data.get("RF");
             state = new DecimalType(value.doubleValue());
+        } else {
+            state = UnDefType.UNDEF;
         }
         updateState(CHANNEL_CURRENT_HUMIDITY, state);
         if (data != null) {
             value = data.get("P");
             state = new DecimalType(value.doubleValue());
+        } else {
+            state = UnDefType.UNDEF;
         }
         updateState(CHANNEL_CURRENT_PRESSURE, state);
         if (data != null) {
             value = data.get("RR");
             state = new DecimalType(value.doubleValue());
+        } else {
+            state = UnDefType.UNDEF;
         }
         updateState(CHANNEL_CURRENT_PRECIPITATION, state);
         if (data != null) {
             value = data.get("SO");
             state = new DecimalType(value.doubleValue());
+        } else {
+            state = UnDefType.UNDEF;
         }
         updateState(CHANNEL_CURRENT_SUNSHINE, state);
+        if (data != null) {
+            value = data.get("GLOW");
+            state = new DecimalType(value.doubleValue());
+        } else {
+            state = UnDefType.UNDEF;
+        }
+        updateState(CHANNEL_CURRENT_RADIATION, state);
     }
 
     private void updateHistoricWeatherData() {
@@ -171,227 +205,503 @@ public class geosphereATHandler extends BaseThingHandler {
         if (data != null) {
             value = data.get("TL_MIN");
             state = new DecimalType(value.doubleValue());
+        } else {
+            state = UnDefType.UNDEF;
         }
         updateState(CHANNEL_LAST24H_TEMPERATURE_MIN, state);
         if (data != null) {
             value = data.get("TL_MAX");
             state = new DecimalType(value.doubleValue());
+        } else {
+            state = UnDefType.UNDEF;
         }
         updateState(CHANNEL_LAST24H_TEMPERATURE_MAX, state);
         if (data != null) {
             value = data.get("TL_AVG");
             state = new DecimalType(value.doubleValue());
+        } else {
+            state = UnDefType.UNDEF;
         }
         updateState(CHANNEL_LAST24H_TEMPERATURE_AVG, state);
         if (data != null) {
             value = data.get("RF_MIN");
             state = new DecimalType(value.doubleValue());
+        } else {
+            state = UnDefType.UNDEF;
         }
         updateState(CHANNEL_LAST24H_HUMIDITY_MIN, state);
         if (data != null) {
             value = data.get("RF_MAX");
             state = new DecimalType(value.doubleValue());
+        } else {
+            state = UnDefType.UNDEF;
         }
         updateState(CHANNEL_LAST24H_HUMIDITY_MAX, state);
         if (data != null) {
             value = data.get("RF_AVG");
             state = new DecimalType(value.doubleValue());
+        } else {
+            state = UnDefType.UNDEF;
         }
         updateState(CHANNEL_LAST24H_HUMIDITY_AVG, state);
         if (data != null) {
             value = data.get("P_MIN");
             state = new DecimalType(value.doubleValue());
+        } else {
+            state = UnDefType.UNDEF;
         }
         updateState(CHANNEL_LAST24H_PRESSURE_MIN, state);
         if (data != null) {
             value = data.get("P_MAX");
             state = new DecimalType(value.doubleValue());
+        } else {
+            state = UnDefType.UNDEF;
         }
         updateState(CHANNEL_LAST24H_PRESSURE_MAX, state);
         if (data != null) {
             value = data.get("P_AVG");
             state = new DecimalType(value.doubleValue());
+        } else {
+            state = UnDefType.UNDEF;
         }
         updateState(CHANNEL_LAST24H_PRESSURE_AVG, state);
         if (data != null) {
             value = data.get("RR_ACC");
             state = new DecimalType(value.doubleValue());
+        } else {
+            state = UnDefType.UNDEF;
         }
         updateState(CHANNEL_LAST24H_PRECIPITATION_ACC, state);
         if (data != null) {
             value = data.get("SO_ACC");
             state = new DecimalType(value.doubleValue());
+        } else {
+            state = UnDefType.UNDEF;
         }
         updateState(CHANNEL_LAST24H_SUNSHINE_ACC, state);
+        if (data != null) {
+            value = data.get("GLOW_MIN");
+            state = new DecimalType(value.doubleValue());
+        } else {
+            state = UnDefType.UNDEF;
+        }
+        updateState(CHANNEL_LAST24H_RADIATION_MIN, state);
+        if (data != null) {
+            value = data.get("GLOW_MAX");
+            state = new DecimalType(value.doubleValue());
+        } else {
+            state = UnDefType.UNDEF;
+        }
+        updateState(CHANNEL_LAST24H_RADIATION_MAX, state);
+        if (data != null) {
+            value = data.get("GLOW_AVG");
+            state = new DecimalType(value.doubleValue());
+        } else {
+            state = UnDefType.UNDEF;
+        }
+        updateState(CHANNEL_LAST24H_RADIATION_AVG, state);
 
         if (data != null) {
             value = data.get("TL_MIN_12H");
             state = new DecimalType(value.doubleValue());
+        } else {
+            state = UnDefType.UNDEF;
         }
         updateState(CHANNEL_LAST12H_TEMPERATURE_MIN, state);
         if (data != null) {
             value = data.get("TL_MAX_12H");
             state = new DecimalType(value.doubleValue());
+        } else {
+            state = UnDefType.UNDEF;
         }
         updateState(CHANNEL_LAST12H_TEMPERATURE_MAX, state);
         if (data != null) {
             value = data.get("TL_AVG_12H");
             state = new DecimalType(value.doubleValue());
+        } else {
+            state = UnDefType.UNDEF;
         }
         updateState(CHANNEL_LAST12H_TEMPERATURE_AVG, state);
         if (data != null) {
             value = data.get("RF_MIN_12H");
             state = new DecimalType(value.doubleValue());
+        } else {
+            state = UnDefType.UNDEF;
         }
         updateState(CHANNEL_LAST12H_HUMIDITY_MIN, state);
         if (data != null) {
             value = data.get("RF_MAX_12H");
             state = new DecimalType(value.doubleValue());
+        } else {
+            state = UnDefType.UNDEF;
         }
         updateState(CHANNEL_LAST12H_HUMIDITY_MAX, state);
         if (data != null) {
             value = data.get("RF_AVG_12H");
             state = new DecimalType(value.doubleValue());
+        } else {
+            state = UnDefType.UNDEF;
         }
         updateState(CHANNEL_LAST12H_HUMIDITY_AVG, state);
         if (data != null) {
             value = data.get("P_MIN_12H");
             state = new DecimalType(value.doubleValue());
+        } else {
+            state = UnDefType.UNDEF;
         }
         updateState(CHANNEL_LAST12H_PRESSURE_MIN, state);
         if (data != null) {
             value = data.get("P_MAX_12H");
             state = new DecimalType(value.doubleValue());
+        } else {
+            state = UnDefType.UNDEF;
         }
         updateState(CHANNEL_LAST12H_PRESSURE_MAX, state);
         if (data != null) {
             value = data.get("P_AVG_12H");
             state = new DecimalType(value.doubleValue());
+        } else {
+            state = UnDefType.UNDEF;
         }
         updateState(CHANNEL_LAST12H_PRESSURE_AVG, state);
         if (data != null) {
             value = data.get("RR_ACC_12H");
             state = new DecimalType(value.doubleValue());
+        } else {
+            state = UnDefType.UNDEF;
         }
         updateState(CHANNEL_LAST12H_PRECIPITATION_ACC, state);
         if (data != null) {
             value = data.get("SO_ACC_12H");
             state = new DecimalType(value.doubleValue());
+        } else {
+            state = UnDefType.UNDEF;
         }
         updateState(CHANNEL_LAST12H_SUNSHINE_ACC, state);
+        if (data != null) {
+            value = data.get("GLOW_MIN_12H");
+            state = new DecimalType(value.doubleValue());
+        } else {
+            state = UnDefType.UNDEF;
+        }
+        updateState(CHANNEL_LAST12H_RADIATION_MIN, state);
+        if (data != null) {
+            value = data.get("GLOW_MAX_12H");
+            state = new DecimalType(value.doubleValue());
+        } else {
+            state = UnDefType.UNDEF;
+        }
+        updateState(CHANNEL_LAST12H_RADIATION_MAX, state);
+        if (data != null) {
+            value = data.get("GLOW_AVG_12H");
+            state = new DecimalType(value.doubleValue());
+        } else {
+            state = UnDefType.UNDEF;
+        }
+        updateState(CHANNEL_LAST12H_RADIATION_AVG, state);
     }
 
     private void updateForecastWeatherData() {
-        Map<String, Number> data = geosphereATAPI.getForecastWeather(config.locationLatLon);
-        State state = UnDefType.UNDEF;
+        WeatherData wd = geosphereATAPI.getForecastWeather(config.locationLatLon);
+        Map<String, Number> data = wd.weatherData;
+        SortedMap<Instant, Number> cloudiness_data = wd.cloudinessData;
+        SortedMap<Instant, Number> radiation_data = wd.radiationData;
+        State state, state1h, state2h = UnDefType.UNDEF;
         @Nullable
-        Number value;
+        Number value, value1h, value2h;
 
         if (data != null) {
             value = data.get("t2m_MIN");
             state = new DecimalType(value.doubleValue());
+        } else {
+            state = UnDefType.UNDEF;
         }
         updateState(CHANNEL_FORECAST24H_TEMPERATURE_MIN, state);
         if (data != null) {
             value = data.get("t2m_MAX");
             state = new DecimalType(value.doubleValue());
+        } else {
+            state = UnDefType.UNDEF;
         }
         updateState(CHANNEL_FORECAST24H_TEMPERATURE_MAX, state);
         if (data != null) {
             value = data.get("t2m_AVG");
             state = new DecimalType(value.doubleValue());
+        } else {
+            state = UnDefType.UNDEF;
         }
         updateState(CHANNEL_FORECAST24H_TEMPERATURE_AVG, state);
         if (data != null) {
             value = data.get("rh2m_MIN");
             state = new DecimalType(value.doubleValue());
+        } else {
+            state = UnDefType.UNDEF;
         }
         updateState(CHANNEL_FORECAST24H_HUMIDITY_MIN, state);
         if (data != null) {
             value = data.get("rh2m_MAX");
             state = new DecimalType(value.doubleValue());
+        } else {
+            state = UnDefType.UNDEF;
         }
         updateState(CHANNEL_FORECAST24H_HUMIDITY_MAX, state);
         if (data != null) {
             value = data.get("rh2m_AVG");
             state = new DecimalType(value.doubleValue());
+        } else {
+            state = UnDefType.UNDEF;
         }
         updateState(CHANNEL_FORECAST24H_HUMIDITY_AVG, state);
         if (data != null) {
             value = data.get("sp_MIN");
             state = new DecimalType(value.doubleValue());
+        } else {
+            state = UnDefType.UNDEF;
         }
         updateState(CHANNEL_FORECAST24H_PRESSURE_MIN, state);
         if (data != null) {
             value = data.get("sp_MAX");
             state = new DecimalType(value.doubleValue());
+        } else {
+            state = UnDefType.UNDEF;
         }
         updateState(CHANNEL_FORECAST24H_PRESSURE_MAX, state);
         if (data != null) {
             value = data.get("sp_AVG");
             state = new DecimalType(value.doubleValue());
+        } else {
+            state = UnDefType.UNDEF;
         }
         updateState(CHANNEL_FORECAST24H_PRESSURE_AVG, state);
         if (data != null) {
             value = data.get("rain_acc_ACC");
             state = new DecimalType(value.doubleValue());
+        } else {
+            state = UnDefType.UNDEF;
         }
         updateState(CHANNEL_FORECAST24H_PRECIPITATION_ACC, state);
-        state = UnDefType.UNDEF;
+        if (data != null) {
+            value = data.get("sundur_acc_ACC");
+            state = new DecimalType(value.doubleValue());
+        } else {
+            state = UnDefType.UNDEF;
+        }
         updateState(CHANNEL_FORECAST24H_SUNSHINE_ACC, state);
+        if (data != null) {
+            value = data.get("grad_MIN");
+            state = new DecimalType(value.doubleValue());
+        } else {
+            state = UnDefType.UNDEF;
+        }
+        updateState(CHANNEL_FORECAST24H_RADIATION_MIN, state);
+        if (data != null) {
+            value = data.get("grad_MAX");
+            state = new DecimalType(value.doubleValue());
+        } else {
+            state = UnDefType.UNDEF;
+        }
+        updateState(CHANNEL_FORECAST24H_RADIATION_MAX, state);
+        if (data != null) {
+            value = data.get("grad_AVG");
+            state = new DecimalType(value.doubleValue());
+        } else {
+            state = UnDefType.UNDEF;
+        }
+        updateState(CHANNEL_FORECAST24H_RADIATION_AVG, state);
 
         if (data != null) {
             value = data.get("t2m_MIN_12H");
             state = new DecimalType(value.doubleValue());
+        } else {
+            state = UnDefType.UNDEF;
         }
         updateState(CHANNEL_FORECAST12H_TEMPERATURE_MIN, state);
         if (data != null) {
             value = data.get("t2m_MAX_12H");
             state = new DecimalType(value.doubleValue());
+        } else {
+            state = UnDefType.UNDEF;
         }
         updateState(CHANNEL_FORECAST12H_TEMPERATURE_MAX, state);
         if (data != null) {
             value = data.get("t2m_AVG_12H");
             state = new DecimalType(value.doubleValue());
+        } else {
+            state = UnDefType.UNDEF;
         }
         updateState(CHANNEL_FORECAST12H_TEMPERATURE_AVG, state);
         if (data != null) {
             value = data.get("rh2m_MIN_12H");
             state = new DecimalType(value.doubleValue());
+        } else {
+            state = UnDefType.UNDEF;
         }
         updateState(CHANNEL_FORECAST12H_HUMIDITY_MIN, state);
         if (data != null) {
             value = data.get("rh2m_MAX_12H");
             state = new DecimalType(value.doubleValue());
+        } else {
+            state = UnDefType.UNDEF;
         }
         updateState(CHANNEL_FORECAST12H_HUMIDITY_MAX, state);
         if (data != null) {
             value = data.get("rh2m_AVG_12H");
             state = new DecimalType(value.doubleValue());
+        } else {
+            state = UnDefType.UNDEF;
         }
         updateState(CHANNEL_FORECAST12H_HUMIDITY_AVG, state);
         if (data != null) {
             value = data.get("sp_MIN_12H");
             state = new DecimalType(value.doubleValue());
+        } else {
+            state = UnDefType.UNDEF;
         }
         updateState(CHANNEL_FORECAST12H_PRESSURE_MIN, state);
         if (data != null) {
             value = data.get("sp_MAX_12H");
             state = new DecimalType(value.doubleValue());
+        } else {
+            state = UnDefType.UNDEF;
         }
         updateState(CHANNEL_FORECAST12H_PRESSURE_MAX, state);
         if (data != null) {
             value = data.get("sp_AVG_12H");
             state = new DecimalType(value.doubleValue());
+        } else {
+            state = UnDefType.UNDEF;
         }
         updateState(CHANNEL_FORECAST12H_PRESSURE_AVG, state);
         if (data != null) {
             value = data.get("rain_acc_ACC_12H");
             state = new DecimalType(value.doubleValue());
+        } else {
+            state = UnDefType.UNDEF;
         }
         updateState(CHANNEL_FORECAST12H_PRECIPITATION_ACC, state);
-        state = UnDefType.UNDEF;
+        if (data != null) {
+            value = data.get("sundur_acc_ACC_12H");
+            state = new DecimalType(value.doubleValue());
+        } else {
+            state = UnDefType.UNDEF;
+        }
         updateState(CHANNEL_FORECAST12H_SUNSHINE_ACC, state);
+        if (data != null) {
+            value = data.get("grad_MIN_12H");
+            state = new DecimalType(value.doubleValue());
+        } else {
+            state = UnDefType.UNDEF;
+        }
+        updateState(CHANNEL_FORECAST12H_RADIATION_MIN, state);
+        if (data != null) {
+            value = data.get("grad_MAX_12H");
+            state = new DecimalType(value.doubleValue());
+        } else {
+            state = UnDefType.UNDEF;
+        }
+        updateState(CHANNEL_FORECAST12H_RADIATION_MAX, state);
+        if (data != null) {
+            value = data.get("grad_AVG_12H");
+            state = new DecimalType(value.doubleValue());
+        } else {
+            state = UnDefType.UNDEF;
+        }
+        updateState(CHANNEL_FORECAST12H_RADIATION_AVG, state);
+
+        if (cloudiness_data != null) {
+            value = -1.0;
+            value1h = -1.0;
+            value2h = -1.0;
+            Instant now = Instant.now();
+            logger.debug("get cloudiness for " + now.toString());
+            for (Map.Entry<Instant, Number> entry : cloudiness_data.entrySet()) {
+                logger.debug("cloudiness: " + entry.toString());
+                if (now.isAfter(entry.getKey()) && value.doubleValue() <= 0.0) {
+                    value = entry.getValue();
+                } else if (now.plus(1, ChronoUnit.HOURS).isAfter(entry.getKey()) && value1h.doubleValue() <= 0.0) {
+                    value1h = entry.getValue();
+                } else if (now.plus(2, ChronoUnit.HOURS).isAfter(entry.getKey()) && value2h.doubleValue() <= 0.0) {
+                    value2h = entry.getValue();
+                    break;
+                }
+            }
+            if (value.doubleValue() < 0.0) {
+                state = UnDefType.UNDEF;
+                logger.debug("no matching cloudiness value available");
+            } else {
+                state = new DecimalType(value.doubleValue());
+                logger.debug("picked cloudiness: " + value.toString());
+            }
+            if (value1h.doubleValue() < 0.0) {
+                state1h = UnDefType.UNDEF;
+                logger.debug("no matching 1h cloudiness value available");
+            } else {
+                state1h = new DecimalType(value1h.doubleValue());
+                logger.debug("picked cloudiness 1h: " + value1h.toString());
+            }
+            if (value2h.doubleValue() < 0.0) {
+                state2h = UnDefType.UNDEF;
+                logger.debug("no matching 2h cloudiness value available");
+            } else {
+                state2h = new DecimalType(value2h.doubleValue());
+                logger.debug("picked cloudiness 2h: " + value2h.toString());
+            }
+            updateState(CHANNEL_FORECAST_CLOUDINESS, state);
+            updateState(CHANNEL_FORECAST_CLOUDINESS_1H, state1h);
+            updateState(CHANNEL_FORECAST_CLOUDINESS_2H, state2h);
+        } else {
+            state = UnDefType.UNDEF;
+            updateState(CHANNEL_FORECAST_CLOUDINESS, state);
+            updateState(CHANNEL_FORECAST_CLOUDINESS_1H, state);
+            updateState(CHANNEL_FORECAST_CLOUDINESS_2H, state);
+        }
+        if (radiation_data != null) {
+            value = -1.0;
+            value1h = -1.0;
+            value2h = -1.0;
+            Instant now = Instant.now();
+            logger.debug("get radiation for " + now.toString());
+            for (Map.Entry<Instant, Number> entry : radiation_data.entrySet()) {
+                logger.debug("radiation: " + entry.toString());
+                if (now.isAfter(entry.getKey()) && value.doubleValue() <= 0.0) {
+                    value = entry.getValue();
+                } else if (now.plus(1, ChronoUnit.HOURS).isAfter(entry.getKey()) && value1h.doubleValue() <= 0.0) {
+                    value1h = entry.getValue();
+                } else if (now.plus(2, ChronoUnit.HOURS).isAfter(entry.getKey()) && value2h.doubleValue() <= 0.0) {
+                    value2h = entry.getValue();
+                    break;
+                }
+            }
+            if (value.doubleValue() < 0.0) {
+                state = UnDefType.UNDEF;
+                logger.debug("no matching radiation value available");
+            } else {
+                state = new DecimalType(value.doubleValue());
+                logger.debug("picked radiation: " + value.toString());
+            }
+            if (value1h.doubleValue() < 0.0) {
+                state1h = UnDefType.UNDEF;
+                logger.debug("no matching 1h radiation value available");
+            } else {
+                state1h = new DecimalType(value1h.doubleValue());
+                logger.debug("picked radiation 1h: " + value1h.toString());
+            }
+            if (value2h.doubleValue() < 0.0) {
+                state2h = UnDefType.UNDEF;
+                logger.debug("no matching 2h radiation value available");
+            } else {
+                state2h = new DecimalType(value2h.doubleValue());
+                logger.debug("picked radiation 2h: " + value2h.toString());
+            }
+            updateState(CHANNEL_FORECAST_RADIATION, state);
+            updateState(CHANNEL_FORECAST_RADIATION_1H, state1h);
+            updateState(CHANNEL_FORECAST_RADIATION_2H, state2h);
+        } else {
+            state = UnDefType.UNDEF;
+            updateState(CHANNEL_FORECAST_RADIATION, state);
+            updateState(CHANNEL_FORECAST_RADIATION_1H, state);
+            updateState(CHANNEL_FORECAST_RADIATION_2H, state);
+        }
     }
 
     @Override
