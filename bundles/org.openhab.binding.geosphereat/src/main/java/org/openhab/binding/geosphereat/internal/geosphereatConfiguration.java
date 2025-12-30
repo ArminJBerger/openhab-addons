@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2010-2025 Contributors to the openHAB project
  *
  * See the NOTICE file(s) distributed with this work for additional
@@ -15,17 +15,17 @@ package org.openhab.binding.geosphereat.internal;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 
 /**
- * The {@link geosphereatConfiguration} class contains fields mapping thing configuration parameters.
+ * The {@link geosphereATConfiguration} class contains fields mapping thing configuration parameters.
  *
  * @author Armin Berger - Initial contribution
  */
 @NonNullByDefault
-public class geosphereatConfiguration {
+public class geosphereATConfiguration {
 
     /**
      * Sample configuration parameters. Replace with your own.
      */
-    public String hostname = "";
-    public String password = "";
-    public int refreshInterval = 600;
+    public int refreshInterval = 3600;
+    public String stationName = "GRAZ/STRASSGANG";
+    public String locationLatLon = "47.047657,15.464803";
 }

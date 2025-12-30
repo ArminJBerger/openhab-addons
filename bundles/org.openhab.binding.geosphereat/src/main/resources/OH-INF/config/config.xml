@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config-description:config-descriptions
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:config-description="https://openhab.org/schemas/config-description/v1.0.0"
+	xsi:schemaLocation="https://openhab.org/schemas/config-description/v1.0.0 https://openhab.org/schemas/config-description-1.0.0.xsd">
+
+	<!-- Config for geosphereAT Binding -->
+	<config-description uri="bridge-type:geosphereat:weather-api">
+		<parameter name="refreshInterval" type="integer" min="1" unit="min">
+			<label>Refresh Interval</label>
+			<description>Specifies the refresh interval (in minutes).</description>
+			<default>60</default>
+		</parameter>
+	</config-description>
+
+</config-description:config-descriptions>

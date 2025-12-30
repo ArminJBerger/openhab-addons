@@ -4,45 +4,329 @@
 	xmlns:thing="https://openhab.org/schemas/thing-description/v1.0.0"
 	xsi:schemaLocation="https://openhab.org/schemas/thing-description/v1.0.0 https://openhab.org/schemas/thing-description-1.0.0.xsd">
 
-	<!-- Sample Thing Type -->
-	<thing-type id="sample">
+	<thing-type id="weatherstation_current">
 		<!-- Comment this in for Things which need a Bridge to function.
 			<supported-bridge-type-refs>
-			<bridge-type-ref id="geosphereatBridge" />
+			<bridge-type-ref id="geosphereATBridge" />
 			</supported-bridge-type-refs>
 		-->
 
-		<label>geosphereat Binding Thing</label>
-		<description>Sample thing for geosphereat Binding</description>
+		<label>geosphereAT Current Weather Data</label>
+		<description>Connects to geosphere.at for fetching current weather data</description>
 
 		<channels>
-			<channel id="channel1" typeId="sample-channel"/>
+			<channel id="current_temperature" typeId="current_temperature"/>
+			<channel id="current_humidity" typeId="current_humidity"/>
+			<channel id="current_pressure" typeId="current_pressure"/>
+			<channel id="current_precipitation" typeId="current_precipitation"/>
+			<channel id="current_sunshine" typeId="current_sunshine"/>
+			<channel id="current_radiation" typeId="current_radiation"/>
 		</channels>
 
 		<config-description>
-			<parameter name="hostname" type="text" required="true">
-				<context>network-address</context>
-				<label>Hostname</label>
-				<description>Hostname or IP address of the device</description>
-			</parameter>
-			<parameter name="password" type="text" required="true">
-				<context>password</context>
-				<label>Password</label>
-				<description>Password to access the device</description>
-			</parameter>
-			<parameter name="refreshInterval" type="integer" unit="s" min="1">
+			<parameter name="refreshInterval" type="integer" unit="s" min="3600">
 				<label>Refresh Interval</label>
 				<description>Interval the device is polled in sec.</description>
-				<default>600</default>
+				<default>14400</default>
 				<advanced>true</advanced>
+			</parameter>
+			<parameter name="stationName" type="text" required="true">
+				<context>weatherstationname</context>
+				<label>Weather station name</label>
+				<description>Name of the weatherstation in the database to use.</description>
+				<default>GRAZ/STRASSGANG</default>
+				<advanced>false</advanced>
 			</parameter>
 		</config-description>
 	</thing-type>
 
+	<thing-type id="weatherstation_historic">
+		<!-- Comment this in for Things which need a Bridge to function.
+			<supported-bridge-type-refs>
+			<bridge-type-ref id="geosphereATBridge" />
+			</supported-bridge-type-refs>
+		-->
+
+		<label>geosphereAT Historic Weather Data</label>
+		<description>Connects to geosphere.at for fetching current weather data</description>
+
+		<channels>
+			<channel id="last24h_temperature_min" typeId="last24h_temperature"/>
+			<channel id="last24h_temperature_max" typeId="last24h_temperature"/>
+			<channel id="last24h_temperature_avg" typeId="last24h_temperature"/>
+			<channel id="last24h_humidity_min" typeId="last24h_humidity"/>
+			<channel id="last24h_humidity_max" typeId="last24h_humidity"/>
+			<channel id="last24h_humidity_avg" typeId="last24h_humidity"/>
+			<channel id="last24h_pressure_min" typeId="last24h_pressure"/>
+			<channel id="last24h_pressure_max" typeId="last24h_pressure"/>
+			<channel id="last24h_pressure_avg" typeId="last24h_pressure"/>
+			<channel id="last24h_precipitation_acc" typeId="last24h_precipitation"/>
+			<channel id="last24h_sunshine_acc" typeId="last24h_sunshine"/>
+			<channel id="last24h_radiation_min" typeId="last24h_radiation"/>
+			<channel id="last24h_radiation_max" typeId="last24h_radiation"/>
+			<channel id="last24h_radiation_avg" typeId="last24h_radiation"/>
+
+			<channel id="last12h_temperature_min" typeId="last12h_temperature"/>
+			<channel id="last12h_temperature_max" typeId="last12h_temperature"/>
+			<channel id="last12h_temperature_avg" typeId="last12h_temperature"/>
+			<channel id="last12h_humidity_min" typeId="last12h_humidity"/>
+			<channel id="last12h_humidity_max" typeId="last12h_humidity"/>
+			<channel id="last12h_humidity_avg" typeId="last12h_humidity"/>
+			<channel id="last12h_pressure_min" typeId="last12h_pressure"/>
+			<channel id="last12h_pressure_max" typeId="last12h_pressure"/>
+			<channel id="last12h_pressure_avg" typeId="last12h_pressure"/>
+			<channel id="last12h_precipitation_acc" typeId="last12h_precipitation"/>
+			<channel id="last12h_sunshine_acc" typeId="last12h_sunshine"/>
+			<channel id="last12h_radiation_min" typeId="last12h_radiation"/>
+			<channel id="last12h_radiation_max" typeId="last12h_radiation"/>
+			<channel id="last12h_radiation_avg" typeId="last12h_radiation"/>
+		</channels>
+
+		<config-description>
+			<parameter name="refreshInterval" type="integer" unit="s" min="3600">
+				<label>Refresh Interval</label>
+				<description>Interval the device is polled in sec.</description>
+				<default>14400</default>
+				<advanced>true</advanced>
+			</parameter>
+			<parameter name="stationName" type="text" required="true">
+				<context>weatherstationname</context>
+				<label>Weather station name</label>
+				<description>Name of the weatherstation in the database to use.</description>
+				<default>GRAZ/STRASSGANG</default>
+				<advanced>false</advanced>
+			</parameter>
+		</config-description>
+	</thing-type>
+
+	<thing-type id="weatherlocation_forecast">
+		<!-- Comment this in for Things which need a Bridge to function.
+			<supported-bridge-type-refs>
+			<bridge-type-ref id="geosphereATBridge" />
+			</supported-bridge-type-refs>
+		-->
+
+		<label>geosphereAT Forecast Weather Data</label>
+		<description>Connects to geosphere.at for fetching weather forecast data</description>
+
+		<channels>
+			<channel id="forecast24h_temperature_min" typeId="forecast24h_temperature"/>
+			<channel id="forecast24h_temperature_max" typeId="forecast24h_temperature"/>
+			<channel id="forecast24h_temperature_avg" typeId="forecast24h_temperature"/>
+			<channel id="forecast24h_humidity_min" typeId="forecast24h_humidity"/>
+			<channel id="forecast24h_humidity_max" typeId="forecast24h_humidity"/>
+			<channel id="forecast24h_humidity_avg" typeId="forecast24h_humidity"/>
+			<channel id="forecast24h_pressure_min" typeId="forecast24h_pressure"/>
+			<channel id="forecast24h_pressure_max" typeId="forecast24h_pressure"/>
+			<channel id="forecast24h_pressure_avg" typeId="forecast24h_pressure"/>
+			<channel id="forecast24h_precipitation_acc" typeId="forecast24h_precipitation"/>
+			<channel id="forecast24h_sunshine_acc" typeId="forecast24h_sunshine"/>
+			<channel id="forecast24h_radiation_min" typeId="forecast24h_radiation"/>
+			<channel id="forecast24h_radiation_max" typeId="forecast24h_radiation"/>
+			<channel id="forecast24h_radiation_avg" typeId="forecast24h_radiation"/>
+
+			<channel id="forecast12h_temperature_min" typeId="forecast12h_temperature"/>
+			<channel id="forecast12h_temperature_max" typeId="forecast12h_temperature"/>
+			<channel id="forecast12h_temperature_avg" typeId="forecast12h_temperature"/>
+			<channel id="forecast12h_humidity_min" typeId="forecast12h_humidity"/>
+			<channel id="forecast12h_humidity_max" typeId="forecast12h_humidity"/>
+			<channel id="forecast12h_humidity_avg" typeId="forecast12h_humidity"/>
+			<channel id="forecast12h_pressure_min" typeId="forecast12h_pressure"/>
+			<channel id="forecast12h_pressure_max" typeId="forecast12h_pressure"/>
+			<channel id="forecast12h_pressure_avg" typeId="forecast12h_pressure"/>
+			<channel id="forecast12h_precipitation_acc" typeId="forecast12h_precipitation"/>
+			<channel id="forecast12h_sunshine_acc" typeId="forecast12h_sunshine"/>
+			<channel id="forecast12h_radiation_min" typeId="forecast12h_radiation"/>
+			<channel id="forecast12h_radiation_max" typeId="forecast12h_radiation"/>
+			<channel id="forecast12h_radiation_avg" typeId="forecast12h_radiation"/>
+
+			<channel id="forecast_cloudiness" typeId="forecast_cloudiness"/>
+			<channel id="forecast_cloudiness_1h" typeId="forecast_cloudiness"/>
+			<channel id="forecast_cloudiness_2h" typeId="forecast_cloudiness"/>
+			<channel id="forecast_radiation" typeId="forecast_radiation"/>
+			<channel id="forecast_radiation_1h" typeId="forecast_radiation"/>
+			<channel id="forecast_radiation_2h" typeId="forecast_radiation"/>
+		</channels>
+
+		<config-description>
+			<parameter name="refreshInterval" type="integer" unit="s" min="3600">
+				<label>Refresh Interval</label>
+				<description>Interval the device is polled in sec.</description>
+				<default>14400</default>
+				<advanced>true</advanced>
+			</parameter>
+			<parameter name="locationLatLon" type="text" required="true">
+				<context>forecastlocation</context>
+				<label>Weather forecast location</label>
+				<description>Forecast location in the database to use.</description>
+				<default>47.047657,15.464803</default>
+				<advanced>false</advanced>
+			</parameter>
+		</config-description>
+	</thing-type>
+
+
 	<!-- Sample Channel Type -->
-	<channel-type id="sample-channel">
+	<channel-type id="current_temperature">
 		<item-type>Number:Temperature</item-type>
-		<label>Example Temperature</label><!-- Use uppercase words, except prepositions. 2-3 words, max 25 chars -->
-		<description>Sample channel for geosphereat Binding</description>
+		<label>Current Temperature</label><!-- Use uppercase words, except prepositions. 2-3 words, max 25 chars -->
+		<description>Temperature channel for geosphereAT data</description>
+	</channel-type>
+	<channel-type id="current_humidity">
+		<item-type>Number:Humidity</item-type>
+		<label>Current Humidity</label><!-- Use uppercase words, except prepositions. 2-3 words, max 25 chars -->
+		<description>Humidity channel for geosphereAT data</description>
+	</channel-type>
+	<channel-type id="current_pressure">
+		<item-type>Number:Pressure</item-type>
+		<label>Current Pressure</label><!-- Use uppercase words, except prepositions. 2-3 words, max 25 chars -->
+		<description>Pressure channel for geosphereAT data</description>
+	</channel-type>
+	<channel-type id="current_precipitation">
+		<item-type>Number</item-type>
+		<label>Current Precipitation</label><!-- Use uppercase words, except prepositions. 2-3 words, max 25 chars -->
+		<description>Precipitation channel for geosphereAT data</description>
+	</channel-type>
+	<channel-type id="current_sunshine">
+		<item-type>Number</item-type>
+		<label>Current Sunshine</label><!-- Use uppercase words, except prepositions. 2-3 words, max 25 chars -->
+		<description>Sunshine channel for geosphereAT data</description>
+	</channel-type>
+	<channel-type id="current_radiation">
+		<item-type>Number</item-type>
+		<label>Current Radiation</label><!-- Use uppercase words, except prepositions. 2-3 words, max 25 chars -->
+		<description>Radiation channel for geosphereAT data</description>
+	</channel-type>
+
+	<channel-type id="last24h_temperature">
+		<item-type>Number:Temperature</item-type>
+		<label>Temperature in past 24h</label><!-- Use uppercase words, except prepositions. 2-3 words, max 25 chars -->
+		<description>Historic Temperature channel for geosphereAT data</description>
+	</channel-type>
+	<channel-type id="last24h_humidity">
+		<item-type>Number:Humidity</item-type>
+		<label>Humidity in past 24h</label><!-- Use uppercase words, except prepositions. 2-3 words, max 25 chars -->
+		<description>Historic Humidity channel for geosphereAT data</description>
+	</channel-type>
+	<channel-type id="last24h_pressure">
+		<item-type>Number:Pressure</item-type>
+		<label>Pressure in past 24h</label><!-- Use uppercase words, except prepositions. 2-3 words, max 25 chars -->
+		<description>Historic Pressure channel for geosphereAT data</description>
+	</channel-type>
+	<channel-type id="last24h_precipitation">
+		<item-type>Number</item-type>
+		<label>Acc. Precipitation in past 24h</label><!-- Use uppercase words, except prepositions. 2-3 words, max 25 chars -->
+		<description>Historic Precipitation channel for geosphereAT data</description>
+	</channel-type>
+	<channel-type id="last24h_sunshine">
+		<item-type>Number</item-type>
+		<label>Acc. Sunshine in past 24h</label><!-- Use uppercase words, except prepositions. 2-3 words, max 25 chars -->
+		<description>Historic Sunshine channel for geosphereAT data</description>
+	</channel-type>
+	<channel-type id="last24h_radiation">
+		<item-type>Number</item-type>
+		<label>Radiation in past 24h</label><!-- Use uppercase words, except prepositions. 2-3 words, max 25 chars -->
+		<description>Historic Radiation channel for geosphereAT data</description>
+	</channel-type>
+	<channel-type id="last12h_temperature">
+		<item-type>Number:Temperature</item-type>
+		<label>Temperature in past 12h</label><!-- Use uppercase words, except prepositions. 2-3 words, max 25 chars -->
+		<description>Historic Temperature channel for geosphereAT data</description>
+	</channel-type>
+	<channel-type id="last12h_humidity">
+		<item-type>Number:Humidity</item-type>
+		<label>Humidity in past 12h</label><!-- Use uppercase words, except prepositions. 2-3 words, max 25 chars -->
+		<description>Historic Humidity channel for geosphereAT data</description>
+	</channel-type>
+	<channel-type id="last12h_pressure">
+		<item-type>Number:Pressure</item-type>
+		<label>Pressure in past 12h</label><!-- Use uppercase words, except prepositions. 2-3 words, max 25 chars -->
+		<description>Historic Pressure channel for geosphereAT data</description>
+	</channel-type>
+	<channel-type id="last12h_precipitation">
+		<item-type>Number</item-type>
+		<label>Acc. Precipitation in past 12h</label><!-- Use uppercase words, except prepositions. 2-3 words, max 25 chars -->
+		<description>Historic Precipitation channel for geosphereAT data</description>
+	</channel-type>
+	<channel-type id="last12h_sunshine">
+		<item-type>Number</item-type>
+		<label>Acc. Sunshine in past 12h</label><!-- Use uppercase words, except prepositions. 2-3 words, max 25 chars -->
+		<description>Historic Sunshine channel for geosphereAT data</description>
+	</channel-type>
+	<channel-type id="last12h_radiation">
+		<item-type>Number</item-type>
+		<label>Radiation in past 12h</label><!-- Use uppercase words, except prepositions. 2-3 words, max 25 chars -->
+		<description>Historic Radiation channel for geosphereAT data</description>
+	</channel-type>
+
+	<channel-type id="forecast24h_temperature">
+		<item-type>Number:Temperature</item-type>
+		<label>Temperature in next 24h</label><!-- Use uppercase words, except prepositions. 2-3 words, max 25 chars -->
+		<description>Forecast Temperature channel for geosphereAT data</description>
+	</channel-type>
+	<channel-type id="forecast24h_humidity">
+		<item-type>Number:Humidity</item-type>
+		<label>Humidity in next 24h</label><!-- Use uppercase words, except prepositions. 2-3 words, max 25 chars -->
+		<description>Forecast Humidity channel for geosphereAT data</description>
+	</channel-type>
+	<channel-type id="forecast24h_pressure">
+		<item-type>Number:Pressure</item-type>
+		<label>Pressure in next 24h</label><!-- Use uppercase words, except prepositions. 2-3 words, max 25 chars -->
+		<description>Forecast Pressure channel for geosphereAT data</description>
+	</channel-type>
+	<channel-type id="forecast24h_precipitation">
+		<item-type>Number</item-type>
+		<label>Acc. Precipitation in next 24h</label><!-- Use uppercase words, except prepositions. 2-3 words, max 25 chars -->
+		<description>Forecast Precipitation channel for geosphereAT data</description>
+	</channel-type>
+	<channel-type id="forecast24h_sunshine">
+		<item-type>Number</item-type>
+		<label>Acc. Sunshine in next 24h</label><!-- Use uppercase words, except prepositions. 2-3 words, max 25 chars -->
+		<description>Forecast Sunshine channel for geosphereAT data</description>
+	</channel-type>
+	<channel-type id="forecast24h_radiation">
+		<item-type>Number</item-type>
+		<label>Radiation in next 24h</label><!-- Use uppercase words, except prepositions. 2-3 words, max 25 chars -->
+		<description>Forecast Radiation channel for geosphereAT data</description>
+	</channel-type>
+	<channel-type id="forecast12h_temperature">
+		<item-type>Number:Temperature</item-type>
+		<label>Temperature in next 12h</label><!-- Use uppercase words, except prepositions. 2-3 words, max 25 chars -->
+		<description>Forecast Temperature channel for geosphereAT data</description>
+	</channel-type>
+	<channel-type id="forecast12h_humidity">
+		<item-type>Number:Humidity</item-type>
+		<label>Humidity in next 12h</label><!-- Use uppercase words, except prepositions. 2-3 words, max 25 chars -->
+		<description>Forecast Humidity channel for geosphereAT data</description>
+	</channel-type>
+	<channel-type id="forecast12h_pressure">
+		<item-type>Number:Pressure</item-type>
+		<label>Pressure in next 12h</label><!-- Use uppercase words, except prepositions. 2-3 words, max 25 chars -->
+		<description>Forecast Pressure channel for geosphereAT data</description>
+	</channel-type>
+	<channel-type id="forecast12h_precipitation">
+		<item-type>Number</item-type>
+		<label>Acc. Precipitation in next 12h</label><!-- Use uppercase words, except prepositions. 2-3 words, max 25 chars -->
+		<description>Forecast Precipitation channel for geosphereAT data</description>
+	</channel-type>
+	<channel-type id="forecast12h_sunshine">
+		<item-type>Number</item-type>
+		<label>Acc. Sunshine in next 12h</label><!-- Use uppercase words, except prepositions. 2-3 words, max 25 chars -->
+		<description>Forecast Sunshine channel for geosphereAT data</description>
+	</channel-type>
+	<channel-type id="forecast12h_radiation">
+		<item-type>Number</item-type>
+		<label>Radiation in next 12h</label><!-- Use uppercase words, except prepositions. 2-3 words, max 25 chars -->
+		<description>Forecast Radiation channel for geosphereAT data</description>
+	</channel-type>
+	<channel-type id="forecast_cloudiness">
+		<item-type>Number</item-type>
+		<label>Forecast Cloudiness</label><!-- Use uppercase words, except prepositions. 2-3 words, max 25 chars -->
+		<description>Forecast Cloudiness channel for geosphereAT data</description>
+	</channel-type>
+	<channel-type id="forecast_radiation">
+		<item-type>Number</item-type>
+		<label>Forecast Radiation</label><!-- Use uppercase words, except prepositions. 2-3 words, max 25 chars -->
+		<description>Forecast Radiation channel for geosphereAT data</description>
 	</channel-type>
 </thing:thing-descriptions>

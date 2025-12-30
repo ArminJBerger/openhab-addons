@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2010-2025 Contributors to the openHAB project
  *
  * See the NOTICE file(s) distributed with this work for additional
@@ -12,7 +12,9 @@
  */
 package org.openhab.binding.geosphereat.internal;
 
-import static org.openhab.binding.geosphereat.internal.geosphereatBindingConstants.*;
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.THING_TYPE_WEATHERLOCATION_FORECAST;
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.THING_TYPE_WEATHERSTATION_CURRENT;
+import static org.openhab.binding.geosphereat.internal.geosphereATBindingConstants.THING_TYPE_WEATHERSTATION_HISTORIC;
 
 import java.util.Set;
 
@@ -26,16 +28,17 @@ import org.openhab.core.thing.binding.ThingHandlerFactory;
 import org.osgi.service.component.annotations.Component;
 
 /**
- * The {@link geosphereatHandlerFactory} is responsible for creating things and thing
+ * The {@link geosphereATHandlerFactory} is responsible for creating things and thing
  * handlers.
  *
  * @author Armin Berger - Initial contribution
  */
 @NonNullByDefault
 @Component(configurationPid = "binding.geosphereat", service = ThingHandlerFactory.class)
-public class geosphereatHandlerFactory extends BaseThingHandlerFactory {
+public class geosphereATHandlerFactory extends BaseThingHandlerFactory {
 
-    private static final Set<ThingTypeUID> SUPPORTED_THING_TYPES_UIDS = Set.of(THING_TYPE_SAMPLE);
+    private static final Set<ThingTypeUID> SUPPORTED_THING_TYPES_UIDS = Set.of(THING_TYPE_WEATHERLOCATION_FORECAST,
+            THING_TYPE_WEATHERSTATION_CURRENT, THING_TYPE_WEATHERSTATION_HISTORIC);
 
     @Override
     public boolean supportsThingType(ThingTypeUID thingTypeUID) {
@@ -46,8 +49,12 @@ public class geosphereatHandlerFactory extends BaseThingHandlerFactory {
     protected @Nullable ThingHandler createHandler(Thing thing) {
         ThingTypeUID thingTypeUID = thing.getThingTypeUID();
 
-        if (THING_TYPE_SAMPLE.equals(thingTypeUID)) {
-            return new geosphereatHandler(thing);
+        if (THING_TYPE_WEATHERSTATION_CURRENT.equals(thingTypeUID)) {
+            return new geosphereATHandler(thing);
+        } else if (THING_TYPE_WEATHERSTATION_HISTORIC.equals(thingTypeUID)) {
+            return new geosphereATHandler(thing);
+        } else if (THING_TYPE_WEATHERLOCATION_FORECAST.equals(thingTypeUID)) {
+            return new geosphereATHandler(thing);
         }
 
         return null;
